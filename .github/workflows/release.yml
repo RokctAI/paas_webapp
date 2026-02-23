@@ -39,6 +39,7 @@ jobs:
     permissions:
       contents: write
       issues: write
+      pull-requests: write
     uses: RokctAI/shared-workflows/.github/workflows/universal-release.yml@main
     with:
       # Dogfooding: Use the new Weekly Strategy
@@ -47,8 +48,6 @@ jobs:
       
       # Brain Endpoint 
       brain_endpoint: https://platform.rokct.ai/api/method/brain.api.generate_release_notes
-<<<<<<< Updated upstream
-=======
 
       # Environment configuration
       node-version: ${{ inputs.node-version || '24' }}
@@ -57,5 +56,4 @@ jobs:
       postgres-version: ${{ inputs.postgres-version || '15' }}
       db-type: ${{ inputs.db-type || 'mariadb' }}
       version_format: ${{ inputs.version_format || '##.##.##' }}
->>>>>>> Stashed changes
     secrets: inherit
