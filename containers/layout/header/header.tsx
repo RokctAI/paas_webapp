@@ -23,7 +23,7 @@ import NotificationStats from "components/notificationStats/notificationStats";
 const AppDrawer = dynamic(() => import("components/appDrawer/appDrawer"));
 const PopoverContainer = dynamic(() => import("containers/popover/popover"));
 const ProfileDropdown = dynamic(
-  () => import("components/profileDropdown/profileDropdown")
+  () => import("components/profileDropdown/profileDropdown"),
 );
 
 export default function Header() {

@@ -33,7 +33,7 @@ export default function Promotion({}: Props) {
         }
         return undefined;
       },
-    }
+    },
   );
   const banners = data?.pages?.flatMap((item) => item.data) || [];
 

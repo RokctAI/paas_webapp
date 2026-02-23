@@ -108,7 +108,7 @@ export function SettingsProvider({
         location: state?.location,
         updateLocation,
         updateLocationId,
-        location_id: state.location_id
+        location_id: state.location_id,
       }}
     >
       {children}

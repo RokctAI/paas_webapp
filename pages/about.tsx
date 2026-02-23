@@ -30,7 +30,7 @@ export default function About({}: Props) {
           sections: [],
         };
       },
-    }
+    },
   );
 
   return (
@@ -47,7 +47,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const locale = getLanguage(getCookie("locale", ctx));
 
   await queryClient.prefetchQuery(["sections", locale], () =>
-    pageService.getAboutSections()
+    pageService.getAboutSections(),
   );
 
   return {

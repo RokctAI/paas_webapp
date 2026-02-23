@@ -1,4 +1,11 @@
-import { Paginate, IShop, SuccessResponse, ShopReview, IBookingShop, IBranch } from "interfaces";
+import {
+  Paginate,
+  IShop,
+  SuccessResponse,
+  ShopReview,
+  IBookingShop,
+  IBranch,
+} from "interfaces";
 import request from "./request";
 
 const shopService = {
@@ -26,7 +33,8 @@ const shopService = {
     request.get(`/rest/shop/${id}/delivery-zone/check/distance`, { params }),
   getByIdReviews: (id: number, params?: any): Promise<Paginate<ShopReview>> =>
     request.get(`/rest/shops/${id}/reviews`, { params }),
-  getAllBranches: (params?: any):Promise<Paginate<IBranch>> => request.get(`/rest/branches`, {params})
+  getAllBranches: (params?: any): Promise<Paginate<IBranch>> =>
+    request.get(`/rest/branches`, { params }),
 };
 
 export default shopService;

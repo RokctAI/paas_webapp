@@ -1,7 +1,7 @@
 // DragScrollLayout.tsx
-import React from 'react';
-import useDragScroll from '../hooks/useDragScroll';
-import styles from './DragScrollLayout.module.css';
+import React from "react";
+import useDragScroll from "../hooks/useDragScroll";
+import styles from "./DragScrollLayout.module.css";
 
 interface DragScrollLayoutProps {
   children: React.ReactNode;

@@ -15,7 +15,7 @@ export default function Terms({}: Props) {
   const locale = i18n.language;
 
   const { data, error } = useQuery(["terms", locale], () =>
-    faqService.getTerms()
+    faqService.getTerms(),
   );
 
   if (error) {
@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const locale = getLanguage(getCookie("locale", ctx));
 
   await queryClient.prefetchQuery(["terms", locale], () =>
-    faqService.getTerms()
+    faqService.getTerms(),
   );
 
   return {

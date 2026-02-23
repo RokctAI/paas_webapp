@@ -23,10 +23,13 @@ const parcelService = {
     request.get(`/rest/parcel-order/calculate-price`, { params }),
   cancel: (id: number) =>
     request.post(
-      `/dashboard/user/parcel-orders/${id}/status/change?status=canceled`
+      `/dashboard/user/parcel-orders/${id}/status/change?status=canceled`,
     ),
   review: (id: number, data: any) =>
-    request.post(`/dashboard/user/parcel-orders/deliveryman-review/${id}`, data),
+    request.post(
+      `/dashboard/user/parcel-orders/deliveryman-review/${id}`,
+      data,
+    ),
 };
 
 export default parcelService;

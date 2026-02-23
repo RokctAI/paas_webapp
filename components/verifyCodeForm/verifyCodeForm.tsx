@@ -71,7 +71,7 @@ export default function VerifyCodeForm({}: Props) {
         onError: (err: any) => {
           error(err.message);
         },
-      }
+      },
     );
   };
 

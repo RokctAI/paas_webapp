@@ -6,7 +6,7 @@ export default function calculateOrderSubTotal(data?: Order) {
   }
   const productsTotal = data.details.reduce(
     (total, item) => (total += item.total_price || 0),
-    0
+    0,
   );
   const addonsTotal = data.details
     .flatMap((item) => item.addons)

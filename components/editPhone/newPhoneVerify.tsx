@@ -66,7 +66,7 @@ export default function NewPhoneVerify({
                 error(err?.data?.params?.phone.at(0));
                 return;
               }
-              error(t('some.thing.went.wrong'))
+              error(t("some.thing.went.wrong"));
             })
             .finally(() => setSubmitting(false));
         })

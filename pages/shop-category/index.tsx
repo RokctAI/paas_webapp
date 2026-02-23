@@ -33,7 +33,7 @@ export default function ShopCategoryPage({}: Props) {
         }
         return undefined;
       },
-    }
+    },
   );
   const shopCategories = data?.pages?.flatMap((item) => item.data) || [];
 

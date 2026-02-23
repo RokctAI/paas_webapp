@@ -28,9 +28,9 @@ export const DYNAMIC_LINK_ANDROID =
   process.env.NEXT_PUBLIC_DYNAMIC_LINK_ANDROID_PACKAGE_NAME;
 export const DYNAMIC_LINK_IOS =
   process.env.NEXT_PUBLIC_DYNAMIC_LINK_IOS_BUNDLE_ID;
-export const DYNAMIC_LINK_WEB_KEY = process.env.NEXT_PUBLIC_FIREBASE_WEB_KEY
+export const DYNAMIC_LINK_WEB_KEY = process.env.NEXT_PUBLIC_FIREBASE_WEB_KEY;
 
 export const defaultUser = {
-  login: 'user@githubit.com',
-  password: 'githubit'
-}
+  login: "user@githubit.com",
+  password: "githubit",
+};

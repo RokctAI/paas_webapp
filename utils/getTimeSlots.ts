@@ -13,7 +13,7 @@ export default function getTimeSlots(
   startStr: string,
   endStr: string,
   isToday: boolean,
-  interval: number = 30
+  interval: number = 30,
 ) {
   let start = stringToMinutes(startStr);
   let end = stringToMinutes(endStr);
@@ -31,6 +31,6 @@ export default function getTimeSlots(
 
   return Array.from(
     { length: Math.floor((end - start) / interval) + 1 },
-    (_, i) => minutesToString(start + i * interval)
+    (_, i) => minutesToString(start + i * interval),
   );
 }

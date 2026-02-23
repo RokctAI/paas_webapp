@@ -27,7 +27,7 @@ export default function RecipeSingle({}: Props) {
   const currency = useAppSelector(selectCurrency);
 
   const { data } = useQuery(["recipe", recipeId, locale, currencyId], () =>
-    recipeService.getById(recipeId, { currency_id: currencyId })
+    recipeService.getById(recipeId, { currency_id: currencyId }),
   );
 
   useDidUpdate(() => {
@@ -68,7 +68,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   await queryClient.prefetchQuery(
     ["recipe", recipeId, locale, currencyId],
-    () => recipeService.getById(recipeId, { currency_id: currencyId })
+    () => recipeService.getById(recipeId, { currency_id: currencyId }),
   );
 
   return {

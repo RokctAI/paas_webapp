@@ -15,7 +15,7 @@ export default function ReferralTerms({}: Props) {
   const locale = i18n.language;
 
   const { data, error } = useQuery(["referral-terms", locale], () =>
-    informationService.getReferrals()
+    informationService.getReferrals(),
   );
 
   if (error) {
@@ -41,7 +41,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const locale = getLanguage(getCookie("locale", ctx));
 
   await queryClient.prefetchQuery(["referral-terms", locale], () =>
-    informationService.getReferrals()
+    informationService.getReferrals(),
   );
 
   return {

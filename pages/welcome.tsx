@@ -20,15 +20,15 @@ export default function Welcome({}: Props) {
   const { locale } = useLocale();
 
   const { data } = useQuery(["landingPage", locale], () =>
-    pageService.getLandingPage()
+    pageService.getLandingPage(),
   );
 
   const { data: stats } = useQuery(["stats", locale], () =>
-    pageService.getStatistics()
+    pageService.getStatistics(),
   );
 
   const { data: blog } = useQuery(["lastBlog", locale], () =>
-    blogService.getLastBlog()
+    blogService.getLastBlog(),
   );
 
   const { data: faqs } = useQuery(["faqs", locale], () => faqService.getAll());
@@ -51,7 +51,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const locale = getLanguage(getCookie("locale", ctx));
 
   await queryClient.prefetchQuery(["landingPage", locale], () =>
-    pageService.getLandingPage()
+    pageService.getLandingPage(),
   );
 
   return {

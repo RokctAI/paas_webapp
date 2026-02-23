@@ -11,7 +11,7 @@ type INotification = {
 
 export const getNotification = (
   setNotification: (data?: IPushNotification) => void,
-  setNotificationData?: (data?: NotificationData) => void
+  setNotificationData?: (data?: NotificationData) => void,
 ) => {
   const messaging = getMessaging(app);
   getToken(messaging, { vapidKey: VAPID_KEY })
@@ -31,7 +31,7 @@ export const getNotification = (
         });
       } else {
         console.log(
-          "No registration token available. Request permission to generate one."
+          "No registration token available. Request permission to generate one.",
         );
       }
     })

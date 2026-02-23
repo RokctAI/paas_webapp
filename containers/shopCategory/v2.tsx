@@ -12,7 +12,7 @@ import useLocale from "hooks/useLocale";
 import { useRouter } from "next/router";
 
 const ShopCategoryHeader = dynamic(
-  () => import("components/shopCategoryHeader/shopCategoryHeader")
+  () => import("components/shopCategoryHeader/shopCategoryHeader"),
 );
 const Loader = dynamic(() => import("components/loader/loader"));
 const Navbar = dynamic(() => import("containers/navbar/v2"));
@@ -35,7 +35,7 @@ export default function ShopCategory() {
 
   const { data: parentCategory } = useQuery(
     ["category", categoryUuid, locale],
-    () => categoryService.getById(categoryUuid, {active: 1})
+    () => categoryService.getById(categoryUuid, { active: 1 }),
   );
   const parentCategoryId = parentCategory?.data.id;
 
@@ -61,7 +61,7 @@ export default function ShopCategory() {
           address: location,
           open: Number(group.open) || undefined,
           deals: group.deals,
-        })
+        }),
       ),
     {
       getNextPageParam: (lastPage: any) => {
@@ -70,7 +70,7 @@ export default function ShopCategory() {
         }
         return undefined;
       },
-    }
+    },
   );
   const shops = data?.pages?.flatMap((item) => item.data) || [];
 
@@ -105,9 +105,15 @@ export default function ShopCategory() {
     <div className="bg-white">
       <ShopCategoryHeader data={parentCategory?.data} />
       {isDesktop ? (
-        <Navbar data={parentCategory?.data} categories={parentCategory?.data.children || []} />
+        <Navbar
+          data={parentCategory?.data}
+          categories={parentCategory?.data.children || []}
+        />
       ) : (
-        <MobileNavbar data={parentCategory?.data} categories={parentCategory?.data.children || []} />
+        <MobileNavbar
+          data={parentCategory?.data}
+          categories={parentCategory?.data.children || []}
+        />
       )}
       <ShopList
         shops={data?.pages?.flatMap((item) => item.data) || []}

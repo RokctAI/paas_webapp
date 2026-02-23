@@ -23,34 +23,39 @@ export default function ProtectedCartButton({}: Props) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const cart = useAppSelector(selectUserCart);
-  const cartIndicatorVisible = useAppSelector(state => state.userCart.indicatorVisible)
+  const cartIndicatorVisible = useAppSelector(
+    (state) => state.userCart.indicatorVisible,
+  );
   const cartItems = cart?.user_carts.flatMap((item) => item.cartDetails) || [];
   const currency = useAppSelector(selectCurrency);
-  const {location} = useSettings();
+  const { location } = useSettings();
 
   useQuery(
     ["cart", currency?.id],
     () => cartService.get({ currency_id: currency?.id }),
     {
-    onSuccess: (data) => dispatch(updateUserCart(data.data)),
+      onSuccess: (data) => dispatch(updateUserCart(data.data)),
       onError: () => dispatch(clearUserCart()),
       retry: false,
-    }
+    },
   );
 
-  const locationArray = location.split(',')
+  const locationArray = location.split(",");
 
- useQuery(
+  useQuery(
     ["shopZone", location],
     () =>
       shopService.checkZoneById(cart?.shop_id, {
-        address: { latitude: locationArray.at(0), longitude: locationArray.at(1) },
+        address: {
+          latitude: locationArray.at(0),
+          longitude: locationArray.at(1),
+        },
       }),
     {
       onError: () => dispatch(updateIndicatorState(false)),
       onSuccess: () => dispatch(updateIndicatorState(true)),
       enabled: !!cartItems.length,
-    }
+    },
   );
 
   if (cartItems.length && cartIndicatorVisible) {

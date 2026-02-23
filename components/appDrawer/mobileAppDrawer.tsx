@@ -40,9 +40,9 @@ export default function MobileAppDrawer({ handleClose }: Props) {
     "activeOrders",
     (): Promise<any> =>
       orderService.getAll(
-        qs.stringify({ order_statuses: true, statuses: activeOrderStatuses })
+        qs.stringify({ order_statuses: true, statuses: activeOrderStatuses }),
       ),
-    { retry: false, enabled: isAuthenticated }
+    { retry: false, enabled: isAuthenticated },
   );
 
   return (
@@ -114,8 +114,12 @@ export default function MobileAppDrawer({ handleClose }: Props) {
             <ArrowRightSLineIcon />
           </Link>
         )}
-         {isAuthenticated && (
-          <Link href={"/saved-locations"} className={cls.row} onClick={handleClose}>
+        {isAuthenticated && (
+          <Link
+            href={"/saved-locations"}
+            className={cls.row}
+            onClick={handleClose}
+          >
             <div className={cls.rowItem}>
               <MapPin2LineIcon />
               <span className={cls.text}>{t("delivery.addresses")}</span>

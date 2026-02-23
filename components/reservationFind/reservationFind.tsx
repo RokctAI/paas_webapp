@@ -47,7 +47,7 @@ export default function ReservationFind({ handleClose }: Props) {
           data: item,
         })),
       enabled: !!selectedShop,
-    }
+    },
   );
 
   const formik = useFormik({

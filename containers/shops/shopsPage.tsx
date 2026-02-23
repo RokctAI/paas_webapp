@@ -16,11 +16,11 @@ import { useRouter } from "next/router";
 const BannerContainer = dynamic(() => import("containers/banner/banner"));
 const Loader = dynamic(() => import("components/loader/loader"));
 const ZoneNotFound = dynamic(
-  () => import("components/zoneNotFound/zoneNotFound")
+  () => import("components/zoneNotFound/zoneNotFound"),
 );
 const Navbar = dynamic(() => import("containers/navbar/navbar"));
 const MobileNavbar = dynamic(
-  () => import("containers/mobileNavbar/mobileNavbar")
+  () => import("containers/mobileNavbar/mobileNavbar"),
 );
 const Empty = dynamic(() => import("components/empty/empty"));
 const ShopList = dynamic(() => import("containers/shopList/shopList"));
@@ -39,12 +39,12 @@ export default function ShopsPage() {
 
   const { data: stories, isLoading: isStoriesLoading } = useQuery(
     ["stories", locale],
-    () => storyService.getAll()
+    () => storyService.getAll(),
   );
 
   const { data: banners, isLoading: isBannerLoading } = useQuery(
     ["banners", locale],
-    () => bannerService.getAll()
+    () => bannerService.getAll(),
   );
 
   const { isSuccess: isInsideZone, isLoading: isZoneLoading } = useQuery(
@@ -52,7 +52,7 @@ export default function ShopsPage() {
     () =>
       shopService.checkZone({
         address: location,
-      })
+      }),
   );
 
   const {
@@ -88,7 +88,7 @@ export default function ShopsPage() {
           open: Number(group.open) || undefined,
           deals: group.deals,
           verify: query?.verify,
-        })
+        }),
       ),
     {
       getNextPageParam: (lastPage: any) => {
@@ -97,12 +97,12 @@ export default function ShopsPage() {
         }
         return undefined;
       },
-    }
+    },
   );
   const shops = data?.pages?.flatMap((item) => item.data) || [];
 
   const { data: shopCategories } = useQuery("shopCategories", () =>
-    categoryService.getAllShopCategories()
+    categoryService.getAllShopCategories(),
   );
 
   const handleObserver = useCallback((entries: any) => {

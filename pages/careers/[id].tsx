@@ -16,7 +16,7 @@ export default function CareerSingle({}: Props) {
   const careerId = Number(query.id);
 
   const { data } = useQuery(["career", careerId, locale], () =>
-    careerService.getById(careerId)
+    careerService.getById(careerId),
   );
 
   return (
@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const locale = getLanguage(req.cookies?.locale);
 
   await queryClient.prefetchQuery(["career", careerId, locale], () =>
-    careerService.getById(careerId)
+    careerService.getById(careerId),
   );
 
   return {

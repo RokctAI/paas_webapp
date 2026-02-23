@@ -37,7 +37,7 @@ export default function MemberCartProduct({ data, cartId, disabled }: Props) {
     {
       onSuccess: (data) => dispatch(updateUserCart(data.data)),
       enabled: false,
-    }
+    },
   );
 
   const { mutate: storeProduct, isLoading } = useMutation({

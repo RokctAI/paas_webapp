@@ -51,13 +51,13 @@ export default function ParcelHeaderForm({
     {
       enabled: Boolean(type_id),
       select: (data) => data.data.price,
-    }
+    },
   );
 
   return (
     <Grid item xs={xs} md={md} lg={lg}>
       <div className={cls.container}>
-        { isDesktop && (
+        {isDesktop && (
           <div className={cls.map}>
             <OrderMap
               fullHeight

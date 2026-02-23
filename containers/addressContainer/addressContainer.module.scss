@@ -48,7 +48,7 @@
   max-width: 400px;
   max-height: 400px;
   overflow-y: auto;
- 
+
   @media (max-width: 1139px) {
     max-width: 100%;
     padding: 0;
@@ -65,7 +65,6 @@
       overflow: hidden;
       justify-content: space-between;
       &:hover {
-
         background-color: var(--grey);
       }
 
@@ -82,7 +81,7 @@
           overflow: hidden;
 
           &.twoLine {
-            -webkit-line-clamp: 2; 
+            -webkit-line-clamp: 2;
           }
         }
 

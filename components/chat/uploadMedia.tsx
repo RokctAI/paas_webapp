@@ -37,7 +37,7 @@ export default function UploadMedia({
       "state_changed",
       (snapshot) => {
         const percent = Math.round(
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
         );
         setPercent(percent);
         if (percent === 100) {
@@ -48,7 +48,7 @@ export default function UploadMedia({
         getDownloadURL(uploadTask.snapshot.ref).then((url) => {
           handleOnSubmit(url);
         });
-      }
+      },
     );
   };
 

@@ -34,7 +34,7 @@ export default function Help({}: Props) {
           }
           return undefined;
         },
-      }
+      },
     );
 
   const handleObserver = useCallback((entries: any) => {
@@ -71,7 +71,7 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const locale = getLanguage(req.cookies?.locale);
 
   await queryClient.prefetchInfiniteQuery(["faqs", locale], () =>
-    faqService.getAll({ perPage: PER_PAGE })
+    faqService.getAll({ perPage: PER_PAGE }),
   );
 
   return {

@@ -8,12 +8,12 @@ const categoryService = {
     }),
   getAllSubCategories: (
     categoryId: string,
-    params: any = {}
+    params: any = {},
   ): Promise<Paginate<Category>> =>
     request.get(`rest/categories/sub-shop/${categoryId}`, { params }),
   getAllProductCategories: (
     id: number,
-    params?: any
+    params?: any,
   ): Promise<Paginate<Category>> =>
     request.get(`/rest/shops/${id}/categories`, { params }),
   getAllRecipeCategories: (params: any = {}): Promise<Paginate<Category>> =>

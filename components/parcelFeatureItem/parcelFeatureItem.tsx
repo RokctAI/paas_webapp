@@ -49,9 +49,7 @@ export default function ParcelFeatureItem({
           ))}
         </div>
         <div className={cls.flex}>
-          <div className={cls.shop}>
-          
-          </div>
+          <div className={cls.shop}></div>
           <button type="button" className={cls.closeBtn} onClick={handleClose}>
             <CloseFillIcon />
           </button>

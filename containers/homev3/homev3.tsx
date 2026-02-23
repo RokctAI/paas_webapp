@@ -16,10 +16,10 @@ const BannerContainer = dynamic(() => import("containers/banner/v3"));
 const ParcelCard = dynamic(() => import("components/parcelCard/v3"));
 const StoreList = dynamic(() => import("containers/storeList/v3"));
 const NewsContainer = dynamic(
-  () => import("containers/newsContainer/newsContainer")
+  () => import("containers/newsContainer/newsContainer"),
 );
 const FeaturedShopsContainer = dynamic(
-  () => import("containers/featuredShopsContainer/v3")
+  () => import("containers/featuredShopsContainer/v3"),
 );
 const ShopBanner = dynamic(() => import("components/shopBanner/shopBanner"));
 
@@ -34,12 +34,12 @@ export default function Home() {
 
   const { data: shopCategories, isLoading: isCategoriesLoading } = useQuery(
     ["shopCategories", locale],
-    () => categoryService.getAllShopCategories({ perPage: 100 })
+    () => categoryService.getAllShopCategories({ perPage: 100 }),
   );
 
   const { data: stories, isLoading: isStoriesLoading } = useQuery(
     ["stories", locale],
-    () => storyService.getAll()
+    () => storyService.getAll(),
   );
 
   const { data: shops, isLoading: isShopLoading } = useQuery(
@@ -50,8 +50,8 @@ export default function Home() {
           perPage: PER_PAGE,
           currency_id: currency?.id,
           verify: 1,
-        })
-      )
+        }),
+      ),
   );
 
   const { data: popularShops, isLoading: popularLoading } = useQuery(
@@ -63,8 +63,8 @@ export default function Home() {
           address: location,
           open: 1,
           currency_id: currency?.id,
-        })
-      )
+        }),
+      ),
   );
 
   const { data: recommendedShops, isLoading: recommendedLoading } = useQuery(
@@ -73,11 +73,11 @@ export default function Home() {
       shopService.getRecommended({
         address: location,
         currency_id: currency?.id,
-      })
+      }),
   );
 
   const { data: ads } = useQuery(["ads", locale], () =>
-    bannerService.getAllAds()
+    bannerService.getAllAds(),
   );
 
   return (

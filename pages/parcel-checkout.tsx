@@ -17,39 +17,46 @@ import ParcelFeatureList from "containers/parcelFeatureList/parcelFeatureList";
 
 type Props = {};
 
-const features:IParcelFeature[][] = [
-  [{
-    id: 0,
-    img: '/images/parcel/feature1.png',
-    title: "save.time"
-  }],
-  [{
-    id: 1,
-    img: '/images/parcel/feature2.png',
-    title: "set.up.delivery"
-  }],
-  [{
-    id: 2,
-    img: '/images/parcel/feature3.png',
-    title: "fast.&.secure.delivery"
-  }],
-  [{
-    id: 3,
-    img: '/images/parcel/feature4.png',
-    title: "delivery.restrictions"
-  }],
-
-]
+const features: IParcelFeature[][] = [
+  [
+    {
+      id: 0,
+      img: "/images/parcel/feature1.png",
+      title: "save.time",
+    },
+  ],
+  [
+    {
+      id: 1,
+      img: "/images/parcel/feature2.png",
+      title: "set.up.delivery",
+    },
+  ],
+  [
+    {
+      id: 2,
+      img: "/images/parcel/feature3.png",
+      title: "fast.&.secure.delivery",
+    },
+  ],
+  [
+    {
+      id: 3,
+      img: "/images/parcel/feature4.png",
+      title: "delivery.restrictions",
+    },
+  ],
+];
 
 export default function ParcelCheckout({}: Props) {
   const { t } = useLocale();
 
   const { data: types } = useQuery("parcelTypes", () =>
-    parcelService.getAllTypes()
+    parcelService.getAllTypes(),
   );
 
   const { data: payments } = useQuery("payments", () =>
-    paymentService.getAll()
+    paymentService.getAll(),
   );
 
   const formatCategories = (list: ParcelType[] = []) => {

@@ -29,7 +29,7 @@ export default function ShopCategory() {
 
   const { data: parentCategory } = useQuery(
     ["category", categoryUuid, locale],
-    () => categoryService.getById(categoryUuid)
+    () => categoryService.getById(categoryUuid),
   );
   const parentCategoryId = parentCategory?.data.id;
 
@@ -55,7 +55,7 @@ export default function ShopCategory() {
           address: location,
           open: Number(group.open) || undefined,
           deals: group.deals,
-        })
+        }),
       ),
     {
       getNextPageParam: (lastPage: any) => {
@@ -64,7 +64,7 @@ export default function ShopCategory() {
         }
         return undefined;
       },
-    }
+    },
   );
   const shops = data?.pages?.flatMap((item) => item.data) || [];
 

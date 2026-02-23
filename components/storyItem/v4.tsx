@@ -41,7 +41,7 @@ export default function StoryItem({
     push(
       `/restaurant/${data.shop_id}?product=${data.product_uuid}`,
       undefined,
-      { shallow: true }
+      { shallow: true },
     );
   };
 

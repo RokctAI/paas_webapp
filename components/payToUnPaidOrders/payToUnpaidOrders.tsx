@@ -43,7 +43,7 @@ export default function PayToUnpaidOrders({ data }: Props) {
       enabled:
         UNPAID_STATUSES.includes(data?.transaction?.status || "paid") &&
         data?.transaction?.payment_system.tag !== "cash",
-    }
+    },
   );
 
   const { paymentTypes } = useMemo(() => {
@@ -51,12 +51,12 @@ export default function PayToUnpaidOrders({ data }: Props) {
     let paymentTypesList: Payment[];
     if (settings?.payment_type === "admin") {
       defaultPaymentType = payments?.data.find(
-        (item: Payment) => item.tag === "cash"
+        (item: Payment) => item.tag === "cash",
       );
       paymentTypesList = payments?.data || [];
     } else {
       defaultPaymentType = data?.shop?.shop_payments?.find(
-        (item) => item.payment.tag === "cash"
+        (item) => item.payment.tag === "cash",
       )?.payment;
       paymentTypesList =
         data?.shop?.shop_payments?.map((item) => item.payment) || [];
@@ -103,11 +103,11 @@ export default function PayToUnpaidOrders({ data }: Props) {
       },
     };
     if (EXTERNAL_PAYMENTS.includes(tag)) {
-      externalPay({name: tag, data: { order_id: payload.id }});
+      externalPay({ name: tag, data: { order_id: payload.id } });
     }
     if (tag === "alipay") {
       window.location.replace(
-        `${BASE_URL}/api/alipay-prepay?order_id=${payload.id}`
+        `${BASE_URL}/api/alipay-prepay?order_id=${payload.id}`,
       );
     }
     transactionCreate(payload);

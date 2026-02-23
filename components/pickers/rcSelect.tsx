@@ -25,7 +25,7 @@ export default function RcSelect({
   error,
   type = "outlined",
   icon,
-  placeholder
+  placeholder,
 }: Props) {
   const { t } = useLocale();
   const [open, anchor, handleOpen, handleClose] = usePopover();
@@ -34,7 +34,7 @@ export default function RcSelect({
     if (onChange) onChange(event, undefined);
     handleClose();
   };
-const controlProps = (item: string) => ({
+  const controlProps = (item: string) => ({
     checked: String(value) === item,
     onChange: handleChange,
     value: item,

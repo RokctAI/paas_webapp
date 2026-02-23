@@ -57,7 +57,7 @@ export default function ShopShare({ data }: Props) {
       "text/plain": axios
         .post(
           `https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=${DYNAMIC_LINK_WEB_KEY}`,
-          payload
+          payload,
         )
         .then((result) => {
           if (!result) {
@@ -82,7 +82,7 @@ export default function ShopShare({ data }: Props) {
     axios
       .post(
         `https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=${DYNAMIC_LINK_WEB_KEY}`,
-        payload
+        payload,
       )
       .then((result) => {
         const copyText = result.data.shortLink;

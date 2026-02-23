@@ -7,7 +7,7 @@ import cls from "./savedLocationsContainer.module.scss";
 import dynamic from "next/dynamic";
 
 const AddressModal = dynamic(
-  () => import("components/addressModal/addressModal")
+  () => import("components/addressModal/addressModal"),
 );
 
 type Props = {

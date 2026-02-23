@@ -75,7 +75,7 @@ export default function StoryItem({
                 id: data.shop_id,
                 price: 0,
                 open: true,
-                verify: 0
+                verify: 0,
               }}
               size="small"
             />

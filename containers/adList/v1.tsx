@@ -18,7 +18,10 @@ export default function AdList({ data, loading }: Props) {
   const { t } = useTranslation();
   const { direction } = useTheme();
   return (
-    <div className={cls.container} style={{display: data?.length === 0 && !loading ? 'none' : 'block'}}>
+    <div
+      className={cls.container}
+      style={{ display: data?.length === 0 && !loading ? "none" : "block" }}
+    >
       <div className="container">
         <div className={cls.header}>
           <h2 className={cls.title}>{t("new.items.with.discount")}</h2>

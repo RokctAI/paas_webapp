@@ -17,7 +17,7 @@ import Price from "components/price/price";
 import parcelService from "services/parcel";
 
 const ConfirmationModal = dynamic(
-  () => import("components/confirmationModal/confirmationModal")
+  () => import("components/confirmationModal/confirmationModal"),
 );
 const DrawerContainer = dynamic(() => import("containers/drawer/drawer"));
 

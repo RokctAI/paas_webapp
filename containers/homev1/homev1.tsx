@@ -16,18 +16,18 @@ const Empty = dynamic(() => import("components/empty/empty"));
 const Loader = dynamic(() => import("components/loader/loader"));
 const BannerContainer = dynamic(() => import("containers/banner/banner"));
 const FeaturedShopsContainer = dynamic(
-  () => import("containers/featuredShopsContainer/featuredShopsContainer")
+  () => import("containers/featuredShopsContainer/featuredShopsContainer"),
 );
 const StoreList = dynamic(() => import("containers/storeList/storeList"));
 const ZoneNotFound = dynamic(
-  () => import("components/zoneNotFound/zoneNotFound")
+  () => import("components/zoneNotFound/zoneNotFound"),
 );
 const NewsContainer = dynamic(
-  () => import("containers/newsContainer/newsContainer")
+  () => import("containers/newsContainer/newsContainer"),
 );
 const ShopList = dynamic(() => import("containers/shopList/shopList"));
 const ShopCategoryList = dynamic(
-  () => import("containers/shopCategoryList/v1")
+  () => import("containers/shopCategoryList/v1"),
 );
 const AdList = dynamic(() => import("containers/adList/v1"));
 const BrandShopList = dynamic(() => import("containers/brandShopList/v1"));
@@ -46,16 +46,16 @@ export default function Homev1() {
 
   const { data: shopCategoryList, isLoading: shopCategoryLoading } = useQuery(
     ["shopcategory", locale],
-    () => categoryService.getAllShopCategories({ perPage: 20 })
+    () => categoryService.getAllShopCategories({ perPage: 20 }),
   );
   const { data: stories, isLoading: isStoriesLoading } = useQuery(
     ["stories", locale],
-    () => storyService.getAll()
+    () => storyService.getAll(),
   );
 
   const { data: banners, isLoading: isBannerLoading } = useQuery(
     ["banners", locale],
-    () => bannerService.getAll()
+    () => bannerService.getAll(),
   );
 
   const { isSuccess: isInsideZone, isLoading: isZoneLoading } = useQuery(
@@ -63,7 +63,7 @@ export default function Homev1() {
     () =>
       shopService.checkZone({
         address: location,
-      })
+      }),
   );
 
   const { data: shops, isLoading: isShopLoading } = useQuery(
@@ -74,8 +74,8 @@ export default function Homev1() {
           perPage: PER_PAGE,
           address: location,
           open: 1,
-        })
-      )
+        }),
+      ),
   );
 
   const {
@@ -101,7 +101,7 @@ export default function Homev1() {
           address: location,
           open: Number(group.open) || undefined,
           deals: group.deals,
-        })
+        }),
       ),
     {
       getNextPageParam: (lastPage: any) => {
@@ -110,24 +110,24 @@ export default function Homev1() {
         }
         return undefined;
       },
-    }
+    },
   );
   const restaurants = data?.pages?.flatMap((item) => item.data) || [];
 
   const { data: recommendedShops, isLoading: recommendedLoading } = useQuery(
     ["recommendedShops", locale, location],
-    () => shopService.getRecommended({ address: location })
+    () => shopService.getRecommended({ address: location }),
   );
 
   const { data: ads, isLoading: adListLoading } = useQuery(
     ["ads", locale, location],
-    () => bannerService.getAllAds({ perPage: 6, address: location })
+    () => bannerService.getAllAds({ perPage: 6, address: location }),
   );
 
   const { data: brandShops, isLoading: brandShopLoading } = useQuery(
     ["brandshops", locale, location],
     () =>
-      shopService.getAllShops(qs.stringify({ verify: "1", address: location }))
+      shopService.getAllShops(qs.stringify({ verify: "1", address: location })),
   );
   const handleObserver = useCallback(
     (entries: any) => {
@@ -136,7 +136,7 @@ export default function Homev1() {
         fetchNextPage();
       }
     },
-    [fetchNextPage, hasNextPage]
+    [fetchNextPage, hasNextPage],
   );
 
   useEffect(() => {

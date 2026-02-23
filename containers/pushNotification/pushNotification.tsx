@@ -12,7 +12,9 @@ type Props = {};
 export default function PushNotification({}: Props) {
   const { t } = useTranslation();
   const [data, setData] = useState<IPushNotification | undefined>(undefined);
-  const [notificationData, setNotificationData] = useState<NotificationData | undefined>(undefined);
+  const [notificationData, setNotificationData] = useState<
+    NotificationData | undefined
+  >(undefined);
 
   useEffect(() => {
     getNotification(setData, setNotificationData);

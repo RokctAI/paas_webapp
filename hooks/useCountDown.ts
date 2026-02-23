@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 
 export const useCountDown: (
   total: number,
@@ -20,7 +20,7 @@ export const useCountDown: (
 
   useEffect(() => {
     intervalId.current = setInterval(() => {
-      startCountDown && counter > 0 && setCountDown(counter => counter - 1);
+      startCountDown && counter > 0 && setCountDown((counter) => counter - 1);
     }, ms);
     if (counter === 0) clearInterval(intervalId.current);
     return () => clearInterval(intervalId.current);

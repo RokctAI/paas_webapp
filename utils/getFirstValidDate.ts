@@ -5,7 +5,7 @@ import roundedDeliveryTime from "./roundedDeliveryTime";
 
 function getSchedule(day: Dayjs, data: IShop) {
   return data?.shop_working_days?.find(
-    (item) => item.day?.toLowerCase() === day.format("dddd").toLowerCase()
+    (item) => item.day?.toLowerCase() === day.format("dddd").toLowerCase(),
   );
 }
 
@@ -23,7 +23,7 @@ export default function getFirstValidDate(data: IShop) {
       if (isToday) {
         time = roundedDeliveryTime(
           dayjs().add(index, "day"),
-          estimatedDeliveryDuration
+          estimatedDeliveryDuration,
         );
       } else {
         const day = dayjs().add(index, "day");
@@ -31,7 +31,7 @@ export default function getFirstValidDate(data: IShop) {
         const openTime = foundedSchedule?.from?.replace("-", ":");
         time = roundedDeliveryTime(
           dayjs(`${date} ${openTime}`),
-          estimatedDeliveryDuration
+          estimatedDeliveryDuration,
         );
       }
       break;

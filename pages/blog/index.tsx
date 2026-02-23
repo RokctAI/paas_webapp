@@ -35,7 +35,7 @@ export default function BlogPage({}: Props) {
           }
           return undefined;
         },
-      }
+      },
     );
 
   const handleObserver = useCallback((entries: any) => {
@@ -74,7 +74,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const locale = getLanguage(getCookie("locale", ctx));
 
   await queryClient.prefetchInfiniteQuery(["blogs", locale], () =>
-    blogService.getAll({ perPage: PER_PAGE, active: 1 })
+    blogService.getAll({ perPage: PER_PAGE, active: 1 }),
   );
 
   return {

@@ -34,7 +34,7 @@ export default function Brands({}: Props) {
           perPage: PER_PAGE,
           address: location,
           open: 1,
-        })
+        }),
       ),
     {
       getNextPageParam: (lastPage: any) => {
@@ -43,7 +43,7 @@ export default function Brands({}: Props) {
         }
         return undefined;
       },
-    }
+    },
   );
   const shops = data?.pages?.flatMap((item) => item.data) || [];
 

@@ -33,7 +33,7 @@ export default function Ads({}: Props) {
         }
         return undefined;
       },
-    }
+    },
   );
   const banners = data?.pages?.flatMap((item) => item.data) || [];
 

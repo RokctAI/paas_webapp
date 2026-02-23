@@ -21,7 +21,7 @@ export default function BlogSingle({}: Props) {
   const { data, error } = useQuery(
     ["blog", blogId, locale],
     () => blogService.getById(blogId),
-    { staleTime: 0 }
+    { staleTime: 0 },
   );
 
   if (error) {
@@ -46,7 +46,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const locale = getLanguage(getCookie("locale", ctx));
 
   await queryClient.prefetchQuery(["blog", params?.id, locale], () =>
-    blogService.getById(String(params?.id))
+    blogService.getById(String(params?.id)),
   );
 
   return {

@@ -46,7 +46,7 @@ export function RestaurantProvider({ children, restaurantState }: Props) {
   });
 
   const { workingSchedule, isShopClosed, isOpen } = useShopWorkingSchedule(
-    state.restaurant
+    state.restaurant,
   );
 
   function updateRestaurant(data?: IShop) {

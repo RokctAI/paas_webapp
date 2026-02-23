@@ -17,7 +17,7 @@ export default function MainContainer({ children, locale }: Props) {
         addResourceBundle(locale, "translation", data.data);
         changeLanguage(locale);
       },
-    }
+    },
   );
 
   return <>{children}</>;

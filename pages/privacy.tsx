@@ -15,7 +15,7 @@ export default function Privacy({}: Props) {
   const locale = i18n.language;
 
   const { data, error } = useQuery(["privacy", locale], () =>
-    faqService.getPrivacy()
+    faqService.getPrivacy(),
   );
 
   if (error) {
@@ -35,7 +35,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const locale = getLanguage(getCookie("locale", ctx));
 
   await queryClient.prefetchQuery(["privacy", locale], () =>
-    faqService.getPrivacy()
+    faqService.getPrivacy(),
   );
 
   return {

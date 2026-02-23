@@ -41,7 +41,7 @@ type Props = {
   setAddress?: (data: any) => void;
   price?: number;
   drawLine?: boolean;
-  defaultZoom?: number
+  defaultZoom?: number;
 };
 
 export default function Map({
@@ -53,7 +53,7 @@ export default function Map({
   setAddress,
   price,
   drawLine,
-  defaultZoom = 15
+  defaultZoom = 15,
 }: Props) {
   const autoCompleteRef = useRef<any>();
   const [maps, setMaps] = useState<any>();
@@ -69,7 +69,7 @@ export default function Map({
     };
     setLocation(location);
     const address = await getAddressFromLocation(
-      `${location.lat},${location.lng}`
+      `${location.lat},${location.lng}`,
     );
     if (inputRef?.current?.value) inputRef.current.value = address;
     if (setAddress) setAddress(address);
@@ -97,7 +97,7 @@ export default function Map({
     if (inputRef) {
       autoCompleteRef.current = new maps.places.Autocomplete(
         inputRef.current,
-        options
+        options,
       );
       autoCompleteRef.current.addListener("place_changed", async function () {
         const place = await autoCompleteRef.current.getPlace();

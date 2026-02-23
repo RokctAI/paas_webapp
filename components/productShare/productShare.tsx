@@ -59,7 +59,7 @@ export default function ProductShare({ data }: Props) {
       "text/plain": axios
         .post(
           `https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=${API_KEY}`,
-          payload
+          payload,
         )
         .then((result) => {
           if (!result) {
@@ -84,7 +84,7 @@ export default function ProductShare({ data }: Props) {
     axios
       .post(
         `https://firebasedynamiclinks.googleapis.com/v1/shortLinks?key=${API_KEY}`,
-        payload
+        payload,
       )
       .then((result) => {
         const copyText = result.data.shortLink;

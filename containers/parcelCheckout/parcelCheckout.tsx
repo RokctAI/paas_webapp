@@ -157,8 +157,9 @@ export default function ParcelCheckoutContainer({ children }: Props) {
         id: data.data.id,
         payment: { payment_sys_id: paymentId },
       };
-      const paymentType = payments?.data.find((item) => item.id == paymentId)
-        ?.tag;
+      const paymentType = payments?.data.find(
+        (item) => item.id == paymentId,
+      )?.tag;
       if (EXTERNAL_PAYMENTS.includes(paymentType || "")) {
         externalPay({
           name: paymentType,

@@ -14,7 +14,7 @@ export default function Deliver({}: Props) {
   const { t, locale } = useLocale();
 
   const { data, error } = useQuery(["deliver", locale], () =>
-    pageService.getDeliverPage()
+    pageService.getDeliverPage(),
   );
 
   if (error) {
@@ -34,7 +34,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
   const locale = getLanguage(getCookie("locale", ctx));
 
   await queryClient.prefetchQuery(["deliver", locale], () =>
-    pageService.getDeliverPage()
+    pageService.getDeliverPage(),
   );
 
   return {
