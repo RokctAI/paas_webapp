@@ -4,11 +4,6 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-permissions:
-  contents: write
-  packages: write
-  id-token: write
-
 on:
   push:
     branches: [ main, develop ]
@@ -73,6 +68,9 @@ jobs:
   # --- 2. UNIFIED PIPELINE (Smart) ---
   pipeline:
     needs: detect
+    permissions:
+      contents: write
+      issues: write
     uses: RokctAI/shared-workflows/.github/workflows/universal-pipeline.yml@main
     with:
       project_type: ${{ needs.detect.outputs.is_flutter == 'true' && 'flutter' || (needs.detect.outputs.is_node == 'true' && 'node' || 'frappe') }}
@@ -83,10 +81,12 @@ jobs:
       # Deployment Configuration (Immediate release on Main)
       release_strategy: 'immediate'
       # Environment configuration
-      node-version: ${{ inputs.node-version || '24' }}
-      python-version: ${{ inputs.python-version || '3.14' }}
-      mariadb-version: ${{ inputs.mariadb-version || '10.6' }}
-      postgres-version: ${{ inputs.postgres-version || '15' }}
-      db-type: ${{ inputs.db-type || 'mariadb' }}
+      node-version: ${{ inputs.node-version }}
+      python-version: ${{ inputs.python-version }}
+      mariadb-version: ${{ inputs.mariadb-version }}
+      postgres-version: ${{ inputs.postgres-version }}
+      db-type: ${{ inputs.db-type }}
       version_format: ${{ inputs.version_format || '##.##.##' }}
+      # Use pnpm as requested by the project structure (pnpm-lock.yaml)
+      package-manager: 'pnpm'
     secrets: inherit
