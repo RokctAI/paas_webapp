@@ -27,6 +27,18 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
+## VPS Deployment (Delta Releases)
+
+To natively fetch the latest GitHub release, strictly apply CI-injected variables (`.env`), and build this application on your VPS securely without cloning the full repository, run the orchestration script:
+
+```bash
+wget https://raw.githubusercontent.com/RokctAI/paas_webapp/main/deploy.sh
+chmod +x deploy.sh
+./deploy.sh --client wrapzo
+```
+
+You can omit the `--client` flag for generic releases, or pass `--token YOUR_PAT` if executing against a private repository.
+
 ## Deploy on Vercel
 
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
