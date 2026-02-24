@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import { SettingsContext } from "./settings.context";
 import { removeCookie, setCookie } from "utils/session";
 import { DEFAULT_LOCATION } from "constants/config";
+import { useQueryClient } from "react-query";
 
 const location = DEFAULT_LOCATION;
 
@@ -21,6 +22,7 @@ interface SettingAction {
 interface SettingState {
   location?: string;
   address?: string;
+  location_id?: string;
 }
 
 function reducer(state: SettingState, action: SettingAction) {
@@ -69,6 +71,7 @@ export function SettingsProvider({
   settingsState = {},
   defaultAddress,
 }: Props) {
+  const queryClient = useQueryClient();
   const [state, dispatch] = useReducer(reducer, {
     location,
     address: defaultAddress,
@@ -81,6 +84,7 @@ export function SettingsProvider({
 
   function resetSettings() {
     dispatch({ type: SettingActionKind.RESET, payload: null });
+    queryClient.invalidateQueries("settings");
   }
 
   function updateAddress(data: string) {
@@ -103,12 +107,12 @@ export function SettingsProvider({
         settings: state,
         updateSettings,
         resetSettings,
-        address: state?.address,
+        address: state?.address || "",
         updateAddress,
-        location: state?.location,
+        location: state?.location || "",
         updateLocation,
         updateLocationId,
-        location_id: state.location_id,
+        location_id: state.location_id || "",
       }}
     >
       {children}

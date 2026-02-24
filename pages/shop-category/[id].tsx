@@ -34,7 +34,7 @@ export default function ShopCategorySinglePage({ uiType = "1" }: PageProps) {
   const categoryId = String(query?.id);
 
   const { data } = useQuery(["category", categoryId, locale], () =>
-    categoryService.getById(categoryId, params),
+    categoryService.getById(categoryId, params)
   );
 
   return (
@@ -53,7 +53,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const obj = createSettings(settingsData?.data);
 
   await queryClient.prefetchQuery(["category", categoryId, locale], () =>
-    categoryService.getById(categoryId, params),
+    categoryService.getById(categoryId, params)
   );
 
   return {

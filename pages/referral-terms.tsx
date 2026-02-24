@@ -48,6 +48,5 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     props: {
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
     },
-    revalidate: 3600,
   };
 };

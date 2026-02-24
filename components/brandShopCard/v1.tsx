@@ -24,10 +24,10 @@ export default function BrandShopCard({ data }: Props) {
           height={100}
         />
         <div className={cls.content}>
-          <strong className={cls.title}>
-            {data.translation?.title}
+          <div className={cls.header}>
+            <strong className={cls.title}>{data.translation?.title}</strong>
             {data?.verify === 1 && <VerifiedComponent />}
-          </strong>
+          </div>
           <span className={cls.deliveryTime}>
             {data.delivery_time?.from} - {data.delivery_time?.to}{" "}
             {t(getShortTimeType(data.delivery_time?.type))}

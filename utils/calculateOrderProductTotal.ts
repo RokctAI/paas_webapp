@@ -8,7 +8,7 @@ type ReturnType = {
 };
 
 export default function calculateOrderProductTotal(
-  data: OrderDetailsType,
+  data: OrderDetailsType
 ): ReturnType {
   if (!data) {
     return {
@@ -20,7 +20,7 @@ export default function calculateOrderProductTotal(
   }
   const addonsTotal = data.addons.reduce(
     (total, item) => (total += item.total_price),
-    0,
+    0
   );
   const productTotal = data.total_price;
   const totalPrice = productTotal + addonsTotal;

@@ -27,7 +27,7 @@ export default function NotificationSettings({ data }: Props) {
           ...acc,
           [cur.id]: Boolean(cur?.notification?.active),
         }),
-        {},
+        {}
       );
     }
     return data.reduce((acc, cur) => ({ ...acc, [cur.id]: false }), {});

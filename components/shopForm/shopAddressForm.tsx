@@ -36,6 +36,7 @@ export default function ShopAddressForm({ formik, lang, loading }: Props) {
 
   useEffect(() => {
     setAddress(inputRef.current?.value);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location]);
 
   return (

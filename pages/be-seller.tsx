@@ -42,13 +42,13 @@ export default function BeSeller({}: Props) {
   const locale = i18n.language;
 
   const { data: shopCategories } = useQuery(["shopCategories", locale], () =>
-    categoryService.getAllShopCategories({ perPage: 100 }),
+    categoryService.getAllShopCategories({ perPage: 100 })
   );
   const { data: tags } = useQuery("tags", () => shopService.getAllTags());
 
   const formattedCategories = useMemo(
     () => formatCategories(shopCategories?.data),
-    [shopCategories?.data],
+    [shopCategories?.data]
   );
 
   return (

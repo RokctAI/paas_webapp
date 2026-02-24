@@ -8,10 +8,10 @@ export default function useShopBookingSchedule(data?: IBookingShop) {
     const today = dayjs().format("YYYY-MM-DD");
     const weekDay = WEEK[dayjs().day()];
     const foundedSchedule = data?.booking_shop_working_days?.find(
-      (item) => item.day === weekDay,
+      (item) => item.day === weekDay
     );
     const isHoliday = data?.booking_shop_closed_date?.some((item) =>
-      dayjs(item.day).isSame(dayjs()),
+      dayjs(item.day).isSame(dayjs())
     );
     const isClosed = !data?.open || isHoliday;
     let schedule = {} as ShopWorkingDays;

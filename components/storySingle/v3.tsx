@@ -20,7 +20,7 @@ export default function StorySingle({ data, list }: Props) {
   const [open, handleOpen, handleClose] = useModal();
   const firstStory = data[0];
   const filteredList = list.filter(
-    (item) => item[0]?.shop_id !== firstStory?.shop_id,
+    (item) => item[0]?.shop_id !== firstStory?.shop_id
   );
 
   const goToStory = (event: React.MouseEvent<HTMLElement>) => {

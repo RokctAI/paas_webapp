@@ -17,12 +17,12 @@ import { useMediaQuery } from "@mui/material";
 import useUserLocation from "hooks/useUserLocation";
 
 const ShopCategoryList = dynamic(
-  () => import("containers/shopCategoryList/v4"),
+  () => import("containers/shopCategoryList/v4")
 );
 const ShopList = dynamic(() => import("containers/shopList/v4"));
 const Navbar = dynamic(() => import("containers/navbar/navbar"));
 const MobileNavbar = dynamic(
-  () => import("containers/mobileNavbar/mobileNavbar"),
+  () => import("containers/mobileNavbar/mobileNavbar")
 );
 
 export default function ShopCategory() {
@@ -35,7 +35,7 @@ export default function ShopCategory() {
   const { newest, order_by, group } = useAppSelector(selectShopFilter);
   const { data, isLoading: categoryLoading } = useQuery(
     ["category", query.id, locale],
-    () => categoryService.getById(String(query.id), { active: 1 }),
+    () => categoryService.getById(String(query.id), {active: 1})
   );
   const {
     data: shops,
@@ -44,16 +44,7 @@ export default function ShopCategory() {
     fetchNextPage,
     hasNextPage,
   } = useInfiniteQuery(
-    [
-      "shops",
-      locale,
-      data?.data.id,
-      order_by,
-      group,
-      location,
-      newest,
-      query?.sub,
-    ],
+    ["shops", locale, data?.data.id, order_by, group, location, newest, query?.sub],
     ({ pageParam = 1 }) =>
       shopService.getAllShops(
         qs.stringify({
@@ -65,10 +56,10 @@ export default function ShopCategory() {
           rating: group.rating?.split(","),
           prices: group.prices,
           // @ts-expect-error
-          address: location,
+            address: location,
           open: Number(group.open) || undefined,
           deals: group.deals,
-        }),
+        })
       ),
     {
       getNextPageParam: (lastPage: any) => {
@@ -77,7 +68,7 @@ export default function ShopCategory() {
         }
         return undefined;
       },
-    },
+    }
   );
 
   const shopList = shops?.pages?.flatMap((item) => item.data) || [];
@@ -89,7 +80,7 @@ export default function ShopCategory() {
         fetchNextPage();
       }
     },
-    [fetchNextPage, hasNextPage],
+    [fetchNextPage, hasNextPage]
   );
 
   useEffect(() => {
@@ -114,19 +105,11 @@ export default function ShopCategory() {
         loading={categoryLoading}
         parent={String(query.id)}
       />
-      {isDesktop ? (
-        <Navbar data={data?.data} hideCategories />
-      ) : (
-        <MobileNavbar data={data?.data} hideCategories />
-      )}
+      {isDesktop ? <Navbar data={data?.data} hideCategories /> : <MobileNavbar data={data?.data} hideCategories />}
       {!isShopLoading && shopList.length === 0 ? (
         <Empty text={t("there.is.no.shops")} />
       ) : (
-        <ShopList
-          shops={shopList}
-          title={data?.data.translation?.title}
-          loading={isShopLoading}
-        />
+        <ShopList shops={shopList} title={data?.data.translation?.title} loading={isShopLoading} />
       )}
       {isFetchingNextPage && <Loader />}
       <div ref={loader} />

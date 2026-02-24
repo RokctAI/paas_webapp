@@ -37,7 +37,7 @@ export default function ProtectedCartProduct({
     {
       onSuccess: (data) => dispatch(updateUserCart(data.data)),
       enabled: false,
-    },
+    }
   );
 
   const { mutate: storeProduct, isLoading } = useMutation({
@@ -94,7 +94,7 @@ export default function ProtectedCartProduct({
   }, [debouncedQuantity]);
 
   function storeProductToCart(product: CartStockWithProducts) {
-    const body: InsertProductBody = {
+    const body:InsertProductBody = {
       shop_id: shopId,
       currency_id: currency?.id,
       rate: currency?.rate,

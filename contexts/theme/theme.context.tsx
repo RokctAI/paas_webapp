@@ -12,7 +12,7 @@ type ThemeContextType = {
 };
 
 export const ThemeContext = createContext<ThemeContextType>(
-  {} as ThemeContextType,
+  {} as ThemeContextType
 );
 
 export const useTheme = () => useContext(ThemeContext);

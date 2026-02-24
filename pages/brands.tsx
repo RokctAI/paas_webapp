@@ -52,6 +52,7 @@ export default function Brands({}: Props) {
     if (target.isIntersecting && hasNextPage) {
       fetchNextPage();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

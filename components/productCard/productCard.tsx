@@ -40,6 +40,7 @@ export default function ProductCard({ data, handleOpen }: Props) {
       }}
       shallow={true}
       replace={true}
+      scroll={false}
       className={`${cls.wrapper} ${data.id === 0 ? cls.active : ""}`}
     >
       <div className={cls.header}>

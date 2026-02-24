@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import cls from "./parcelCheckout.module.scss";
 import dayjs from "dayjs";
 import { useFormik } from "formik";
@@ -7,7 +7,7 @@ import { useAuth } from "contexts/auth/auth.context";
 import { useSettings } from "contexts/settings/settings.context";
 import { Grid, useMediaQuery } from "@mui/material";
 import { useMutation, useQuery } from "react-query";
-import { error } from "components/alert/toast";
+import { error, success } from "components/alert/toast";
 import { useRouter } from "next/router";
 import ShopForm from "components/shopForm/shopForm";
 import Unauthorized from "components/unauthorized/unauthorized";
@@ -17,12 +17,14 @@ import { useAppSelector } from "hooks/useRedux";
 import { selectCurrency } from "redux/slices/currency";
 import paymentService from "services/payment";
 import { EXTERNAL_PAYMENTS } from "constants/constants";
+import Loading from "../../components/loader/loading";
 
 type Props = {
   children: any;
 };
 
 export default function ParcelCheckoutContainer({ children }: Props) {
+  const router = useRouter();
   const { t } = useTranslation();
   const isDesktop = useMediaQuery("(min-width:1140px)");
   const { isAuthenticated, user } = useAuth();
@@ -31,6 +33,8 @@ export default function ParcelCheckoutContainer({ children }: Props) {
   const { push } = useRouter();
   const currency = useAppSelector(selectCurrency);
   const [selectedType, setSelectedType] = useState<ParcelType | undefined>();
+  const [payFastUrl, setPayFastUrl] = useState("");
+  const [payFastWebHookWaiting, setPayFastWebHookWaiting] = useState(false);
 
   const handleSelectType = (value: ParcelType) => {
     setSelectedType(value);
@@ -165,8 +169,9 @@ export default function ParcelCheckoutContainer({ children }: Props) {
           name: paymentType,
           data: { parcel_id: payload.id },
         });
+      } else {
+        transactionCreate(payload);
       }
-      transactionCreate(payload);
     },
     onError: () => {
       error(t("error.400"));
@@ -188,44 +193,99 @@ export default function ParcelCheckoutContainer({ children }: Props) {
   const { isLoading: externalPayLoading, mutate: externalPay } = useMutation({
     mutationFn: (payload: any) =>
       paymentService.payExternal(payload.name, payload.data),
-    onSuccess: (data) => {
-      window.location.replace(data.data.data.url);
+    onSuccess: (data, payload) => {
+      if (payload.name === "pay-fast") {
+        if (data?.data?.data?.sandbox) {
+          setPayFastUrl(
+            `https://sandbox.payfast.co.za/onsite/engine.js/?uuid=${data?.data?.data?.uuid}`,
+          );
+        } else {
+          setPayFastUrl(
+            `https://www.payfast.co.za/onsite/engine.js/?uuid=${data?.data?.data?.uuid}`,
+          );
+        }
+      } else {
+        window.location.replace(data.data.data.url);
+      }
     },
     onError: (err: any) => {
       error(err?.data?.message);
     },
   });
 
+  useEffect(() => {
+    if (payFastUrl) {
+      const script = document.createElement("script");
+      script.src = payFastUrl;
+      script.async = true;
+      script.onload = () => {
+        // @ts-ignore
+        if (window.payfast_do_onsite_payment) {
+          // @ts-ignore
+          window.payfast_do_onsite_payment(
+            {
+              uuid: payFastUrl.split("uuid=")[1],
+            },
+            (result: boolean) => {
+              if (result) {
+                success(t("payment.success"));
+              } else {
+                error(t("payment.failed"));
+              }
+              setPayFastWebHookWaiting(true);
+              setTimeout(() => {
+                setPayFastWebHookWaiting(false);
+                router.replace(`/parcels`);
+              }, 10000);
+            },
+          );
+        }
+      };
+      document.body.appendChild(script);
+      setPayFastUrl("");
+      return () => {
+        document.body.removeChild(script);
+      };
+    }
+  }, [payFastUrl]);
+
   return (
-    <div className={cls.root}>
-      <div className={cls.container}>
-        <div className="container">
-          <div className={cls.header}>
-            <h1 className={cls.title}>{t("door.to.door.delivery")}</h1>
+    <>
+      {payFastWebHookWaiting && (
+        <div className={cls.overlay}>
+          <Loading />
+        </div>
+      )}
+      <div className={cls.root}>
+        <div className={cls.container}>
+          <div className="container">
+            <div className={cls.header}>
+              <h1 className={cls.title}>{t("door.to.door.delivery")}</h1>
+            </div>
           </div>
         </div>
+        <div className="container">
+          <form className={cls.wrapper} onSubmit={formik.handleSubmit}>
+            <Grid container spacing={isDesktop ? 4 : 1}>
+              {isAuthenticated ? (
+                React.Children.map(children, (child) => {
+                  return React.cloneElement(child, {
+                    formik,
+                    loading:
+                      isLoading || isLoadingTransaction || externalPayLoading,
+                    selectedType,
+                    handleSelectType,
+                  });
+                })
+              ) : (
+                <ShopForm xs={12} md={8}>
+                  <Unauthorized text={t("sign.in.parcel.order")} />
+                </ShopForm>
+              )}
+            </Grid>
+          </form>
+        </div>
       </div>
-      <div className="container">
-        <form className={cls.wrapper} onSubmit={formik.handleSubmit}>
-          <Grid container spacing={isDesktop ? 4 : 1}>
-            {isAuthenticated ? (
-              React.Children.map(children, (child) => {
-                return React.cloneElement(child, {
-                  formik,
-                  loading:
-                    isLoading || isLoadingTransaction || externalPayLoading,
-                  selectedType,
-                  handleSelectType,
-                });
-              })
-            ) : (
-              <ShopForm xs={12} md={8}>
-                <Unauthorized text={t("sign.in.parcel.order")} />
-              </ShopForm>
-            )}
-          </Grid>
-        </form>
-      </div>
-    </div>
+    </>
   );
 }

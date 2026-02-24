@@ -45,10 +45,10 @@ export default function ShopCard({ data }: Props) {
           <ShopLogo data={data} />
         </div>
         <ShopBadges data={data} />
-        <h3 className={cls.title}>
-          {data.translation?.title}
+        <div className={cls.titleContainer}>
+          <h3 className={cls.title}>{data.translation?.title}</h3>
           {data?.verify === 1 && <VerifiedComponent />}
-        </h3>
+        </div>
         <p className={cls.text}>
           {data.bonus ? (
             <BonusCaption data={data.bonus} />

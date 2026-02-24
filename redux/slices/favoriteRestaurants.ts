@@ -20,7 +20,7 @@ const favoriteRestaurantSlice = createSlice({
     removeFromLiked(state, action: PayloadAction<IShop>) {
       const { payload } = action;
       const filtered = state.favoriteRestaurants.filter(
-        (item) => item.uuid !== payload.uuid,
+        (item) => item.uuid !== payload.uuid
       );
       state.favoriteRestaurants = filtered;
     },

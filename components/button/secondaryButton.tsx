@@ -10,7 +10,7 @@ type Props = {
   disabled?: boolean;
   onClick?: () => void;
   type?: ButtonType;
-  icon?: React.ReactElement;
+  icon?: React.ReactElement<any>;
   size?: ButtonSize;
   loading?: boolean;
 };

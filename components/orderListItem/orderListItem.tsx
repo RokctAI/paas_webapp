@@ -37,10 +37,7 @@ export default function OrderListItem({ data, active }: Props) {
       <div className={cls.actions}>
         <div className={cls.orderInfo}>
           <h5 className={cls.price}>
-            <Price
-              number={data.total_price < 0 ? 0 : data.total_price}
-              symbol={data.currency?.symbol}
-            />
+            <Price number={data.total_price < 0 ? 0 : data.total_price} symbol={data.currency?.symbol} />
           </h5>
           <p className={cls.text}>
             {dayjs(data.created_at).format("DD.MM.YY — HH:mm")}

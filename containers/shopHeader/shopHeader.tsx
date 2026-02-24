@@ -110,7 +110,7 @@ export default function ShopHeader({ data }: Props) {
               </div>
               <FavoriteBtn checked={isLiked} onClick={toggleLike} />
               <SupportBtn />
-              <ShopShare data={data} />
+              <ShopShare />
             </div>
           </div>
         </div>

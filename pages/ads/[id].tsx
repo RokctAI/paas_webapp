@@ -17,22 +17,22 @@ const lists = {
   "1": dynamic(() => import("containers/shopList/shopList")),
   "2": dynamic(() => import("containers/shopList/v2")),
   "4": dynamic(() => import("containers/shopList/v4")),
-  "3": dynamic(() => import("containers/shopList/v3")),
+  "3": dynamic(() => import("containers/shopList/v3"))
 };
 
 const PER_PAGE = 12;
 
 type Props = {
-  uiType?: keyof typeof lists;
-};
+  uiType?: keyof typeof lists 
+}
 
-export default function AdSingle({ uiType = "1" }: Props) {
+export default function AdSingle({uiType = "1"}: Props) {
   const { i18n } = useTranslation();
   const locale = i18n.language;
   const { query } = useRouter();
   const adId = String(query.id);
   const loader = useRef(null);
-  const ShopList = lists[uiType] || lists["1"];
+  const ShopList = lists[uiType] || lists['1']
 
   const {
     data,
@@ -58,7 +58,7 @@ export default function AdSingle({ uiType = "1" }: Props) {
         }
         return undefined;
       },
-    },
+    }
   );
   const pages = data?.pages?.flatMap((item) => item.data);
   const banner = pages ? pages[0] : {};
@@ -70,7 +70,7 @@ export default function AdSingle({ uiType = "1" }: Props) {
         fetchNextPage();
       }
     },
-    [fetchNextPage, hasNextPage],
+    [fetchNextPage, hasNextPage]
   );
 
   useEffect(() => {
@@ -94,10 +94,7 @@ export default function AdSingle({ uiType = "1" }: Props) {
         description={banner.translation?.description}
         image={getImage(banner.img)}
       />
-      <div
-        style={{ minHeight: "60vh" }}
-        className={uiType === "4" || uiType === "2" ? "white-bg" : ""}
-      >
+      <div style={{ minHeight: "60vh" }} className={uiType === '4' || uiType === '2' ? 'white-bg' : ''}>
         <ShopList
           shops={pages?.flatMap((item) => item.shops) || []}
           loading={isLoading}
@@ -121,13 +118,13 @@ export const getServerSideProps: GetServerSideProps = async ({
   const obj = createSettings(settingsData?.data);
 
   await queryClient.prefetchInfiniteQuery(["ad", adId, locale], () =>
-    bannerService.getAdById(adId, { perPage: PER_PAGE }),
+    bannerService.getAdById(adId, { perPage: PER_PAGE })
   );
 
   return {
     props: {
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
-      uiType: process.env.NEXT_PUBLIC_UI_TYPE || obj.ui_type,
+      uiType: process.env.NEXT_PUBLIC_UI_TYPE || obj.ui_type
     },
   };
 };

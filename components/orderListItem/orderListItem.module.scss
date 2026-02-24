@@ -40,7 +40,7 @@
       &.active {
         background-color: var(--primary);
         svg {
-          fill: #232b2f;
+          fill: var(--primary-button-font-color);
         }
       }
       @media (max-width: 576px) {

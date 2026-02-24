@@ -18,7 +18,7 @@ type Props = {
   error?: boolean;
   type?: "standard" | "outlined";
   placeholder?: string;
-  icon?: React.ReactElement;
+  icon?: React.ReactElement<any>;
 };
 
 export default function RcAddressPicker({

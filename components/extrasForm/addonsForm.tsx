@@ -47,7 +47,7 @@ export default function AddonsForm({
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [selectedAddons],
+    [selectedAddons]
   );
 
   useDidUpdate(() => {

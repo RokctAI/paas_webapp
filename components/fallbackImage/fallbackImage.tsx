@@ -25,6 +25,7 @@ export default function FallbackImage({
   width,
   height,
 }: Props) {
+  let actualFill = fill;
   const isValidSrc =
     src &&
     (src.startsWith("/") ||
@@ -35,13 +36,16 @@ export default function FallbackImage({
     console.error("Invalid image source:", src);
     return null; // Prevent rendering if src is invalid  (author: @frenchfkingbaguette)
   }
+  if (!width || !height) {
+    actualFill = true;
+  }
   return (
     <Image
       style={style}
       src={src}
       alt={alt}
       title={alt}
-      fill={fill}
+      fill={actualFill}
       width={width}
       height={height}
       className={cls.root}

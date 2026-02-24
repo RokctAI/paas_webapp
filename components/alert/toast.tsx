@@ -7,24 +7,24 @@ import Alert from "./alert";
 export const success = (msg: string, options?: ToastOptions) => {
   toast(
     <Alert icon={<CheckboxCircleLineIcon />} message={msg} type="success" />,
-    options,
+    options
   );
 };
 export const warning = (msg: React.ReactNode, options?: ToastOptions) => {
   toast(
     <Alert icon={<ErrorWarningLineIcon />} message={msg} type="warning" />,
-    options,
+    options
   );
 };
 export const error = (msg: string, options?: ToastOptions) => {
   toast(
     <Alert icon={<ErrorWarningLineIcon />} message={msg} type="error" />,
-    options,
+    options
   );
 };
 export const info = (msg: string, options?: ToastOptions) => {
   toast(
     <Alert icon={<InformationLineIcon />} message={msg} type="info" />,
-    options,
+    options
   );
 };

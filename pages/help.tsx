@@ -42,6 +42,7 @@ export default function Help({}: Props) {
     if (target.isIntersecting && hasNextPage) {
       fetchNextPage();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

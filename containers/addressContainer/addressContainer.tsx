@@ -27,7 +27,7 @@ type Props = {};
 export default function AddressContainer({}: Props) {
   const { t } = useTranslation();
   const isDesktop = useMediaQuery("(min-width:1140px)");
-  const addressRef = useRef<any>();
+  const addressRef = useRef<any>(undefined);
   const [addressModal, handleOpenAddressModal, handleCloseAddressModal] =
     useModal();
   const [
@@ -58,10 +58,13 @@ export default function AddressContainer({}: Props) {
     {
       onSuccess: (res) => {
         if (res.length !== 0) {
-          const defaultAddress = res.find((item) => Boolean(item.active));
+          const defaultAddress = res?.find((item) => Boolean(item?.active));
           let latlng: string;
-          if (defaultAddress?.location) {
-            latlng = `${defaultAddress?.location.at(0)},${defaultAddress.location.at(1)}`;
+          if (
+            defaultAddress?.location?.latitude &&
+            defaultAddress?.location?.longitude
+          ) {
+            latlng = `${defaultAddress?.location?.latitude},${defaultAddress?.location?.longitude}`;
           } else {
             latlng = location;
           }
@@ -74,20 +77,11 @@ export default function AddressContainer({}: Props) {
     },
   );
 
-  useEffect(() => {
-    if (!address) {
-      window.navigator.geolocation.getCurrentPosition(
-        defineLocation,
-        defineLocation,
-      );
-    }
-  }, []);
-
   async function defineLocation(position: any) {
     const { coords } = position;
     let latlng: string;
     if (coords) {
-      latlng = `${coords.latitude},${coords.longitude}`;
+      latlng = `${coords?.latitude},${coords?.longitude}`;
     } else {
       latlng = location;
     }
@@ -116,6 +110,16 @@ export default function AddressContainer({}: Props) {
     event.stopPropagation();
     handleOpenAddressPopover(event);
   };
+
+  useEffect(() => {
+    if (!address) {
+      window.navigator.geolocation.getCurrentPosition(
+        defineLocation,
+        defineLocation,
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
@@ -179,7 +183,6 @@ export default function AddressContainer({}: Props) {
             addresses={addresses}
             handleCloseList={handleCloseSavedAddressList}
             onSelectAddress={(value) => {
-              console.log(value);
               setEditedAddress(value);
               handleCloseSavedAddressList();
               handleOpenAddressModal();
@@ -196,7 +199,6 @@ export default function AddressContainer({}: Props) {
             addresses={addresses}
             handleCloseList={handleCloseSavedAddressList}
             onSelectAddress={(value) => {
-              console.log(value);
               setEditedAddress(value);
               handleCloseSavedAddressList();
               handleOpenAddressModal();
@@ -211,7 +213,12 @@ export default function AddressContainer({}: Props) {
             handleCloseAddressModal();
             setEditedAddress(null);
           }}
-          latlng={editedAddress?.location.join(",") || userLocation || location}
+          latlng={
+            editedAddress?.location?.latitude &&
+            editedAddress?.location?.longitude
+              ? `${editedAddress?.location?.latitude},${editedAddress?.location?.longitude}`
+              : userLocation || location
+          }
           address={editedAddress?.address?.address || userAddress || address}
           fullScreen={!isDesktop}
           editedAddress={editedAddress}

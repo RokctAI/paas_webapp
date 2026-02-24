@@ -24,6 +24,7 @@ const AppDrawer = dynamic(() => import("components/appDrawer/appDrawer"));
 const PopoverContainer = dynamic(() => import("containers/popover/popover"));
 const ProfileDropdown = dynamic(
   () => import("components/profileDropdown/profileDropdown"),
+  { ssr: false },
 );
 
 export default function Header() {

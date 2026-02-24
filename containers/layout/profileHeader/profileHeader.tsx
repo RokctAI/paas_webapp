@@ -10,7 +10,7 @@ import SecondaryButton from "components/button/secondaryButton";
 import { useTheme } from "contexts/theme/theme.context";
 
 const ProfileDropdown = dynamic(
-  () => import("components/profileDropdown/profileDropdown"),
+  () => import("components/profileDropdown/profileDropdown")
 );
 
 type Props = {};

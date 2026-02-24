@@ -61,7 +61,7 @@ export default function BranchList({
         fetchNextPage();
       }
     },
-    [fetchNextPage, hasNextPage],
+    [fetchNextPage, hasNextPage]
   );
 
   useEffect(() => {

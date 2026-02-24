@@ -42,7 +42,7 @@ export default function ReferralContainer({ data, loading }: Props) {
     }
     try {
       await navigator.clipboard.writeText(
-        WEBSITE_URL + "/register?referral_code=" + user?.my_referral,
+        WEBSITE_URL + "/register?referral_code=" + user?.my_referral
       );
       success(t("copied"));
     } catch (err) {

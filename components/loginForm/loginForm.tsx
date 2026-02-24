@@ -15,9 +15,14 @@ import { setCookie } from "utils/session";
 import { LoginCredentials } from "interfaces/user.interface";
 import { Stack } from "@mui/material";
 import { defaultUser } from "constants/config";
+import { TabSwitch } from "../tabSwitch/tabSwitch";
+import MailLineIcon from "remixicon-react/MailLineIcon";
+import PhoneLineIcon from "remixicon-react/PhoneLineIcon";
+import { PhoneNumberInput } from "../phoneNumberInput/phoneNumberInput";
 
 type Props = {};
 interface formValues {
+  type: "email" | "phone";
   email?: string;
   phone?: string;
   password: string;
@@ -25,28 +30,40 @@ interface formValues {
   keep_logged?: boolean;
 }
 
+const tabs = [
+  {
+    value: "email",
+    icon: <MailLineIcon />,
+  },
+  {
+    value: "phone",
+    icon: <PhoneLineIcon />,
+  },
+];
+
 export default function LoginForm({}: Props) {
   const { t } = useTranslation();
   const { push } = useRouter();
   const { setUserData } = useAuth();
 
-  const isDemo = process.env.NEXT_PUBLIC_IS_DEMO_APP === "true";
-
   const formik = useFormik({
     initialValues: {
+      type: "email",
+      email: "",
+      phone: "",
       login: "",
       password: "",
       keep_logged: true,
     },
     onSubmit: (values: formValues, { setSubmitting }) => {
       let body: LoginCredentials;
-      if (values.login?.includes("@")) {
+      if (values.type === "email") {
         body = {
-          email: values.login,
+          email: values.email,
           password: values.password,
         };
       } else {
-        const trimmedPhone = values.login?.replace(/[^0-9]/g, "");
+        const trimmedPhone = values.phone?.replace(/[^0-9]/g, "");
         body = {
           phone: Number(trimmedPhone),
           password: values.password,
@@ -65,17 +82,17 @@ export default function LoginForm({}: Props) {
     },
     validate: (values: formValues) => {
       const errors: formValues = {} as formValues;
-      if (!values.login) {
-        errors.login = t("required");
-      }
-      if (
-        values.login?.includes("@") &&
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.login)
-      ) {
-        errors.login = t("should.be.valid");
-      }
-      if (values.login?.includes(" ")) {
-        errors.login = t("should.not.includes.empty.space");
+      if (values.type === "email") {
+        if (!values.email) {
+          errors.email = t("required");
+        } else if (
+          values.email?.includes("@") &&
+          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+        ) {
+          errors.email = t("email.should.be.valid");
+        } else if (values.email?.includes(" ")) {
+          errors.email = t("should.not.includes.empty.space");
+        }
       }
       if (!values.password) {
         errors.password = "Required";
@@ -84,8 +101,8 @@ export default function LoginForm({}: Props) {
     },
   });
 
-  const handleCopy = (login: string, password: string) => {
-    formik.setValues({ login, password, keep_logged: true });
+  const handleCopy = (email: string, password: string) => {
+    formik.setValues({ type: "email", email, password, keep_logged: true });
   };
 
   return (
@@ -97,14 +114,33 @@ export default function LoginForm({}: Props) {
         </p>
       </div>
       <div className={cls.space} />
-      <TextInput
-        name="login"
-        label={isDemo ? t("email") : t("email.or.phone")}
-        placeholder={t("type.here")}
-        value={formik.values.login}
-        onChange={formik.handleChange}
-        error={!!formik.errors.login && formik.touched.login}
+      <TabSwitch
+        tabs={tabs}
+        selectedTab={formik.values.type}
+        setSelectedTab={(type) => formik.setFieldValue("type", type)}
       />
+      <div className={cls.space} />
+      {formik.values.type === "email" ? (
+        <TextInput
+          name="email"
+          label={t("email")}
+          placeholder={t("type.here")}
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          error={!!formik.errors.email && formik.touched.email}
+        />
+      ) : (
+        <div className={cls.phone}>
+          <label htmlFor="phone" className={cls.label}>
+            {t("phone")}
+          </label>
+          <PhoneNumberInput
+            name="phone"
+            value={formik.values.phone || ""}
+            onChange={(phone) => formik.setFieldValue("phone", phone)}
+          />
+        </div>
+      )}
       <div className={cls.space} />
       <PasswordInput
         name="password"
@@ -136,19 +172,21 @@ export default function LoginForm({}: Props) {
           {t("login")}
         </PrimaryButton>
       </div>
-      <div className={cls.userInfo}>
-        <Stack>
-          <span className={cls.login}>{defaultUser.login}</span>
-          <span className={cls.password}>{defaultUser.password}</span>
-        </Stack>
-        <button
-          onClick={() => handleCopy(defaultUser.login, defaultUser.password)}
-          type={"button"}
-          className={cls.copy}
-        >
-          {t("copy")}
-        </button>
-      </div>
+      {process.env.NEXT_PUBLIC_IS_DEMO_APP === "true" && (
+        <div className={cls.userInfo}>
+          <Stack>
+            <span className={cls.login}>{defaultUser.login}</span>
+            <span className={cls.password}>{defaultUser.password}</span>
+          </Stack>
+          <button
+            onClick={() => handleCopy(defaultUser.login, defaultUser.password)}
+            type={"button"}
+            className={cls.copy}
+          >
+            {t("copy")}
+          </button>
+        </div>
+      )}
     </form>
   );
 }

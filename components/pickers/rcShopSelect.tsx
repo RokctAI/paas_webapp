@@ -18,16 +18,10 @@ type Props = {
   value?: IShop;
   onChange: (value?: IShop) => void;
   error?: boolean;
-  hasSection?: number;
+  hasSection?: number
 };
 
-export default function RcShopSelect({
-  label,
-  value,
-  onChange,
-  error,
-  hasSection,
-}: Props) {
+export default function RcShopSelect({ label, value, onChange, error, hasSection }: Props) {
   const { t, i18n } = useTranslation();
   const location = useUserLocation();
   const locale = i18n.language;
@@ -50,8 +44,8 @@ export default function RcShopSelect({
           page: pageParam,
           address: location,
           open: 1,
-          has_section: hasSection,
-        }),
+          has_section: hasSection
+        })
       ),
     {
       getNextPageParam: (lastPage: any) => {
@@ -61,7 +55,7 @@ export default function RcShopSelect({
         return undefined;
       },
       retry: false,
-    },
+    }
   );
 
   const shopList = shops?.pages?.flatMap((item) => item.data) || [];
@@ -73,7 +67,7 @@ export default function RcShopSelect({
         fetchShopsNextPage();
       }
     },
-    [hasShopsNextPage, fetchShopsNextPage],
+    [hasShopsNextPage, fetchShopsNextPage]
   );
 
   useEffect(() => {

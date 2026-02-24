@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useRef } from "react";
-import dynamic from "next/dynamic";
 import { useInfiniteQuery, useQuery } from "react-query";
 import { useTranslation } from "react-i18next";
-import { useMediaQuery } from "@mui/material";
 import shopService from "services/shop";
 import categoryService from "services/category";
 import { selectShopFilter } from "redux/slices/shopFilter";
@@ -11,33 +9,23 @@ import storyService from "services/story";
 import bannerService from "services/banner";
 import useUserLocation from "hooks/useUserLocation";
 import qs from "qs";
-
-const Empty = dynamic(() => import("components/empty/empty"));
-const Loader = dynamic(() => import("components/loader/loader"));
-const BannerContainer = dynamic(() => import("containers/banner/banner"));
-const FeaturedShopsContainer = dynamic(
-  () => import("containers/featuredShopsContainer/featuredShopsContainer"),
-);
-const StoreList = dynamic(() => import("containers/storeList/storeList"));
-const ZoneNotFound = dynamic(
-  () => import("components/zoneNotFound/zoneNotFound"),
-);
-const NewsContainer = dynamic(
-  () => import("containers/newsContainer/newsContainer"),
-);
-const ShopList = dynamic(() => import("containers/shopList/shopList"));
-const ShopCategoryList = dynamic(
-  () => import("containers/shopCategoryList/v1"),
-);
-const AdList = dynamic(() => import("containers/adList/v1"));
-const BrandShopList = dynamic(() => import("containers/brandShopList/v1"));
+import ShopCategoryList from "containers/shopCategoryList/v1";
+import StoreList from "containers/storeList/storeList";
+import AdList from "containers/adList/v1";
+import BrandShopList from "containers/brandShopList/v1";
+import FeaturedShopsContainer from "containers/featuredShopsContainer/featuredShopsContainer";
+import ShopList from "containers/shopList/shopList";
+import NewsContainer from "containers/newsContainer/newsContainer";
+import BannerContainer from "containers/banner/banner";
+import Loader from "components/loader/loader";
+import Empty from "components/empty/empty";
+import ZoneNotFound from "components/zoneNotFound/zoneNotFound";
 
 const PER_PAGE = 12;
 
 export default function Homev1() {
   const { t, i18n } = useTranslation();
   const locale = i18n.language;
-  const isDesktop = useMediaQuery("(min-width:1140px)");
   const loader = useRef(null);
   const { category_id, newest, order_by, group } =
     useAppSelector(selectShopFilter);
@@ -172,27 +160,25 @@ export default function Homev1() {
       />
       <AdList data={ads?.data} loading={adListLoading} />
       <BrandShopList data={brandShops?.data || []} loading={brandShopLoading} />
-      <div style={{ minHeight: "60vh" }}>
-        {!category_id && !newest && !isFilterActive && isInsideZone && (
-          <FeaturedShopsContainer
-            title={t("recommended")}
-            featuredShops={recommendedShops?.data || []}
-            loading={recommendedLoading}
-          />
-        )}
-        <ShopList
-          title={newest ? t("news.week") : t("all.restaurants")}
-          shops={restaurants}
-          loading={isLoading && !isFetchingNextPage}
+      {Boolean(!category_id && !newest && !isFilterActive && isInsideZone) && (
+        <FeaturedShopsContainer
+          title={t("recommended")}
+          featuredShops={recommendedShops?.data || []}
+          loading={recommendedLoading}
         />
-        {isFetchingNextPage && <Loader />}
-        <div ref={loader} />
+      )}
+      <ShopList
+        title={newest ? t("news.week") : t("all.restaurants")}
+        shops={restaurants}
+        loading={isLoading && !isFetchingNextPage}
+      />
+      {isFetchingNextPage && <Loader />}
+      <div ref={loader} />
 
-        {!isInsideZone && !isZoneLoading && <ZoneNotFound />}
-        {!restaurants.length && !isLoading && isInsideZone && (
-          <Empty text={t("no.restaurants")} />
-        )}
-      </div>
+      {Boolean(!isInsideZone && !isZoneLoading) && <ZoneNotFound />}
+      {Boolean(!restaurants.length && !isLoading && isInsideZone) && (
+        <Empty text={t("no.restaurants")} />
+      )}
       <NewsContainer />
     </>
   );

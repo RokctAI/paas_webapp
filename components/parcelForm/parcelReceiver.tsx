@@ -47,18 +47,14 @@ export default function ParcelReceiverForm({
   } = formik.values;
   const [addressModal, handleOpenAddressModal, handleCloseAddressModal] =
     useModal();
-
-  const { location } = useSettings();
+  
+  const {location} = useSettings();
   const defaultLocation = {
     latitude: location?.split(",")[0],
     longitude: location?.split(",")[1],
-  };
+  }
 
-  const {
-    data: price,
-    isLoading,
-    isError,
-  } = useQuery(
+  const { data: price, isLoading, isError } = useQuery(
     ["calculateParcel", location_from, location_to, type_id, currency],
     () =>
       parcelService.calculate({
@@ -70,10 +66,10 @@ export default function ParcelReceiverForm({
     {
       enabled: Boolean(type_id),
       select: (data) => data.data.price,
-      onError: (e: any) => {
-        error(e?.data?.message);
-      },
-    },
+      onError: (e:any) => {
+        error(e?.data?.message)
+      }
+    }
   );
 
   const handleAddToDescription = (value?: string) => {
@@ -171,7 +167,7 @@ export default function ParcelReceiverForm({
             label={t("item.description")}
             name="description"
             multiline
-            sx={{ ".MuiInput-root": { marginTop: "2rem" } }}
+            sx={{".MuiInput-root": {marginTop: '2rem'}}}
             value={formik.values.description}
             onChange={formik.handleChange}
             placeholder={t("what.are.you.sending")}
@@ -183,7 +179,7 @@ export default function ParcelReceiverForm({
             <Swiper spaceBetween={10} slidesPerView="auto">
               {selectedType?.options?.map((option) => {
                 const stringContains = description?.includes(
-                  option.translation?.title || "",
+                  option.translation?.title || ""
                 );
                 return (
                   <SwiperSlide

@@ -6,7 +6,6 @@ import PrimaryButton from "components/button/primaryButton";
 import { useFormik } from "formik";
 import { error } from "components/alert/toast";
 import { useAuth } from "contexts/auth/auth.context";
-import authService from "../../services/auth";
 
 type EditPhoneViews = "EDIT" | "VERIFY";
 type Props = {
@@ -42,8 +41,8 @@ export default function InsertNewPhone({ onSuccess, changeView }: Props) {
             changeView("VERIFY");
           })
           .catch((err) => {
-            error(t("sms.not.sent"));
-            console.log("err => ", err);
+            error(err?.message || t("sms.not.sent"));
+            console.log("err => ", err?.message);
           })
           .finally(() => {
             setSubmitting(false);

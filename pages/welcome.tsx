@@ -9,7 +9,7 @@ import blogService from "services/blog";
 import WelcomeBlog from "components/welcomeBlog/welcomeBlog";
 import FaqContainer from "containers/faq/faq";
 import faqService from "services/faq";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import getLanguage from "utils/getLanguage";
 import { getCookie } from "utils/session";
 import pageService from "services/page";
@@ -46,7 +46,7 @@ export default function Welcome({}: Props) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const queryClient = new QueryClient();
   const locale = getLanguage(getCookie("locale", ctx));
 
@@ -58,6 +58,5 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     props: {
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
     },
-    revalidate: 3600,
   };
 };

@@ -10,32 +10,20 @@ import CheckoutPickupForm from "./checkoutPickupForm";
 type Props = {
   data: IShop;
   formik: FormikProps<OrderFormValues>;
-  onPhoneVerify: () => void;
+  onPhoneVerify: () => void
 };
 
-export default function CheckoutDelivery({
-  data,
-  formik,
-  onPhoneVerify,
-}: Props) {
+export default function CheckoutDelivery({ data, formik, onPhoneVerify }: Props) {
   const { delivery_type } = formik.values;
 
   return (
     <div className={cls.card}>
       <CheckoutDeliveryTabs data={data} formik={formik} />
       <Box display={delivery_type === "delivery" ? "block" : "none"}>
-        <CheckoutDeliveryForm
-          data={data}
-          formik={formik}
-          onPhoneVerify={onPhoneVerify}
-        />
+        <CheckoutDeliveryForm data={data} formik={formik} onPhoneVerify={onPhoneVerify} />
       </Box>
       <Box display={delivery_type === "delivery" ? "none" : "block"}>
-        <CheckoutPickupForm
-          data={data}
-          formik={formik}
-          onPhoneVerify={onPhoneVerify}
-        />
+        <CheckoutPickupForm data={data} formik={formik} onPhoneVerify={onPhoneVerify} />
       </Box>
     </div>
   );

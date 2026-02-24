@@ -139,6 +139,7 @@ export default function OTPVerify({
 
   useEffect(() => {
     timerStart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

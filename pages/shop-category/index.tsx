@@ -42,6 +42,7 @@ export default function ShopCategoryPage({}: Props) {
     if (target.isIntersecting && hasNextPage) {
       fetchNextPage();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

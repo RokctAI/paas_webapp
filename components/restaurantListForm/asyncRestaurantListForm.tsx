@@ -19,9 +19,7 @@ export default function AsyncBranchListForm({ handleSubmit, branchId }: Props) {
   const [selectedValue, setSelectedValue] = useState<string>(String(branchId));
 
   const { data, isLoading } = useQuery(["branches", locale], () =>
-    shopService.getAll(
-      qs.stringify({ page: 1, perPage: 100, open: 1, has_section: 1 }),
-    ),
+    shopService.getAll(qs.stringify({ page: 1, perPage: 100, open: 1, has_section: 1 }))
   );
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,20 +45,11 @@ export default function AsyncBranchListForm({ handleSubmit, branchId }: Props) {
                   <RadioInput {...controlProps(String(item.id))} />
                   <label className={cls.label} htmlFor={String(item.id)}>
                     <div className={cls.content}>
-                      <Image
-                        src={item.logo_img || ""}
-                        alt={item.translation.title}
-                        width={50}
-                        height={50}
-                        className={cls.img}
-                      />
+                      <Image src={item.logo_img || ""} alt={item.translation.title} width={50} height={50} className={cls.img} />
                       <div className={cls.main}>
-                        <span className={cls.text}>
-                          {item.translation?.title}
-                        </span>
-                        <div className={cls.muted}>
-                          {item.translation?.address}
-                        </div>
+
+                    <span className={cls.text}>{item.translation?.title}</span>
+                    <div className={cls.muted}>{item.translation?.address}</div>
                       </div>
                     </div>
                   </label>

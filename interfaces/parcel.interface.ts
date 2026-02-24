@@ -1,10 +1,4 @@
-import {
-  Currency,
-  ITransaction,
-  Location,
-  OrderReview,
-  Translation,
-} from "interfaces";
+import { Currency, ITransaction, Location, OrderReview, Translation } from "interfaces";
 import { IUser } from "./user.interface";
 
 export interface Parcel {
@@ -93,5 +87,5 @@ export interface ParcelFormValues {
   notify?: boolean;
   instructions: string;
   description: string;
-  qr_value: string;
+  qr_value: string
 }

@@ -10,7 +10,7 @@ const notificationService = {
     request.get(`/dashboard/notifications`, { params }),
   getById: (
     id: number,
-    params?: any,
+    params?: any
   ): Promise<SuccessResponse<IUserPushNotification>> =>
     request.get(`/dashboard/notifications/${id}`, { params }),
   getStatistics: (params?: any): Promise<IUserPushNotificationStats> =>

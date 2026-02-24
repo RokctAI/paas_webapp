@@ -24,12 +24,12 @@ export default function Liked({}: Props) {
 
   const { data: stories, isLoading: isStoriesLoading } = useQuery(
     ["stories", locale],
-    () => storyService.getAll(),
+    () => storyService.getAll()
   );
 
   const { data: banners, isLoading: isBannerLoading } = useQuery(
     ["banners", locale],
-    () => bannerService.getAll(),
+    () => bannerService.getAll()
   );
 
   return (

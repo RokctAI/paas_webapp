@@ -120,6 +120,7 @@ export default function VerifyPhoneCode({
 
   useEffect(() => {
     timerStart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

@@ -4,7 +4,7 @@ import { RootState } from "redux/store";
 
 type UserCartType = {
   userCart: CartType;
-  indicatorVisible?: boolean;
+  indicatorVisible?: boolean
 };
 
 const initialState: UserCartType = {
@@ -31,31 +31,27 @@ const userCartSlice = createSlice({
     updateUserCart(state, action) {
       const { payload } = action;
       state.userCart = payload;
-      state.indicatorVisible = true;
+      state.indicatorVisible = true
     },
     updateGroupStatus(state, action) {
       const { payload } = action;
       state.userCart.group = !state.userCart.group;
       state.userCart.id = payload.id;
       state.userCart.owner_id = payload.owner_id;
-      state.indicatorVisible = true;
+      state.indicatorVisible = true
     },
     clearUserCart(state) {
       state.userCart = initialState.userCart;
-      state.indicatorVisible = false;
+      state.indicatorVisible = false
     },
     updateIndicatorState(state, action) {
-      state.indicatorVisible = action.payload;
-    },
+      state.indicatorVisible = action.payload
+    }
   },
 });
 
-export const {
-  updateUserCart,
-  updateGroupStatus,
-  clearUserCart,
-  updateIndicatorState,
-} = userCartSlice.actions;
+export const { updateUserCart, updateGroupStatus, clearUserCart, updateIndicatorState } =
+  userCartSlice.actions;
 
 export const selectUserCart = (state: RootState) => state.userCart.userCart;
 

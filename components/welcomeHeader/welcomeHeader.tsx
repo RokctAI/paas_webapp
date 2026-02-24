@@ -12,7 +12,7 @@ import useModal from "hooks/useModal";
 
 const AppDrawer = dynamic(() => import("components/appDrawer/appDrawer"));
 const ProfileDropdown = dynamic(
-  () => import("components/profileDropdown/profileDropdown"),
+  () => import("components/profileDropdown/profileDropdown")
 );
 
 type Props = {};

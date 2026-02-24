@@ -1,8 +1,8 @@
-import React from "react";
 import Map from "components/map/map";
 import { Order } from "interfaces";
 import cls from "./orderMap.module.scss";
 import { Skeleton } from "@mui/material";
+import { useMemo } from "react";
 
 type Props = {
   data?: Order;
@@ -20,10 +20,13 @@ export default function OrderMap({
   price,
   drawLine,
 }: Props) {
-  const location = {
-    lat: Number(data?.location?.latitude) || 0,
-    lng: Number(data?.location?.longitude) || 0,
-  };
+  const location = useMemo(
+    () => ({
+      lat: Number(data?.location?.latitude) || 0,
+      lng: Number(data?.location?.longitude) || 0,
+    }),
+    [data?.location],
+  );
 
   return (
     <div className={`${cls.wrapper} ${fullHeight ? cls.fullHeight : ""}`}>

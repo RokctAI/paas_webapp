@@ -19,11 +19,11 @@ export default function ReservationShop({}: Props) {
   const shopId = Number(query.id);
 
   const { data } = useQuery(["bookingShop", locale, shopId], () =>
-    bookingService.getBookingSchedule(shopId),
+    bookingService.getBookingSchedule(shopId)
   );
 
   const { data: reviews } = useQuery(["shopReviews", locale, shopId], () =>
-    shopService.getByIdReviews(shopId),
+    shopService.getByIdReviews(shopId)
   );
 
   return (
@@ -42,7 +42,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const shopId = Number(ctx.query.id);
 
   await queryClient.prefetchQuery(["bookingShop", locale, shopId], () =>
-    bookingService.getBookingSchedule(shopId),
+    bookingService.getBookingSchedule(shopId)
   );
 
   return {

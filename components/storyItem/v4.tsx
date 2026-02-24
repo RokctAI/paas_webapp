@@ -3,7 +3,6 @@ import cls from "./v4.module.scss";
 import { Story } from "interfaces";
 import CloseFillIcon from "remixicon-react/CloseFillIcon";
 import Image from "next/image";
-import { useTranslation } from "react-i18next";
 import StoryLine from "./storyLinev4";
 import useTimer from "hooks/useTimer";
 import { STORY_DURATION } from "constants/story";
@@ -26,7 +25,6 @@ export default function StoryItem({
   currentIndex,
   storyNext,
 }: Props) {
-  const { t } = useTranslation();
   const time = useTimer(STORY_DURATION);
   const swiper = useSwiper();
   const { push } = useRouter();
@@ -35,6 +33,7 @@ export default function StoryItem({
     if (!time) {
       storyNext(swiper);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [time]);
 
   const goToOrder = () => {

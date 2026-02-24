@@ -34,7 +34,7 @@ export default function ShopInfoDetails({ data, onClose }: Props) {
   const { data: branches } = useQuery(
     ["branches", data?.id],
     () => shopService.getAllBranches({ shop_id: data?.id }),
-    { enabled: !!data?.id },
+    { enabled: !!data?.id }
   );
 
   const copyToClipBoard = async () => {

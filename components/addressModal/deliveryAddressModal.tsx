@@ -141,8 +141,8 @@ export default function DeliveryAddressModal<T>({
                     onClick={(newAddress) => {
                       setSelectedAddress(newAddress);
                       setLocation({
-                        lat: Number(newAddress.location.at(0)),
-                        lng: Number(newAddress.location.at(1)),
+                        lat: Number(newAddress?.location?.latitude || 0),
+                        lng: Number(newAddress?.location?.longitude || 0),
                       });
                       !!onSavedAddressSelect &&
                         onSavedAddressSelect(newAddress);

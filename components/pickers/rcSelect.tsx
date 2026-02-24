@@ -7,14 +7,14 @@ import RadioInput from "components/inputs/radioInput";
 import { SelectChangeEvent, SelectProps } from "@mui/material";
 import useLocale from "hooks/useLocale";
 
-interface Props extends SelectProps {
+type Props = SelectProps & {
   options?: {
     label: string;
     value: string;
   }[];
   type?: "standard" | "outlined";
-  icon?: React.ReactElement;
-}
+  icon?: React.ReactElement<any>;
+};
 
 export default function RcSelect({
   value,

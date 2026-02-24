@@ -15,7 +15,7 @@ type Props = {
   lg?: number;
   title?: string;
   sticky?: boolean;
-  selectedType?: ParcelType;
+  selectedType?: ParcelType
 };
 
 export default function ShopForm({
@@ -28,7 +28,7 @@ export default function ShopForm({
   title,
   loading,
   sticky,
-  selectedType,
+  selectedType
 }: Props) {
   const isDesktop = useMediaQuery("(min-width:900px)");
 
@@ -48,12 +48,7 @@ export default function ShopForm({
             </div>
           )}
           {React.Children.map(children, (child) => {
-            return React.cloneElement(child, {
-              formik,
-              lang,
-              loading,
-              selectedType,
-            });
+            return React.cloneElement(child, { formik, lang, loading, selectedType });
           })}
         </div>
       </div>

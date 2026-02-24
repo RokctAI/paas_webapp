@@ -42,7 +42,7 @@ export default function PayToUnpaidOrders({ data }: Props) {
     {
       enabled:
         UNPAID_STATUSES.includes(data?.transaction?.status || "paid") &&
-        data?.transaction?.payment_system.tag !== "cash",
+        data?.transaction?.payment_system?.tag !== "cash",
     },
   );
 
@@ -127,7 +127,7 @@ export default function PayToUnpaidOrders({ data }: Props) {
           title={t("payment.method")}
         >
           <PaymentMethod
-            value={data?.transaction?.payment_system.tag}
+            value={data?.transaction?.payment_system?.tag}
             list={paymentTypes}
             handleClose={handleClosePaymentMethod}
             isButtonLoading={isLoadingTransaction || externalPayLoading}
@@ -145,7 +145,7 @@ export default function PayToUnpaidOrders({ data }: Props) {
           title={t("payment.method")}
         >
           <PaymentMethod
-            value={data?.transaction?.payment_system.tag}
+            value={data?.transaction?.payment_system?.tag}
             list={paymentTypes}
             handleClose={handleClosePaymentMethod}
             onSubmit={(tag) => {

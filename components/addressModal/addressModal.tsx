@@ -13,12 +13,7 @@ import { useFormik } from "formik";
 import CompassDiscoverLineIcon from "remixicon-react/CompassDiscoverLineIcon";
 import { getAddressFromLocation } from "utils/getAddressFromLocation";
 import shopService from "services/shop";
-import {
-  InfiniteData,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import { useAuth } from "contexts/auth/auth.context";
 import { AddressCreateData, IAddress } from "interfaces/address.interface";
 import addressService from "services/address";
@@ -52,13 +47,13 @@ export default function AddressModal({
   const { updateAddress, updateLocation, location_id, updateLocationId } =
     useSettings();
   const [location, setLocation] = useState({
-    lat: Number(latlng.split(",")[0]),
-    lng: Number(latlng.split(",")[1]),
+    lat: Number(latlng?.split(",")?.[0]) || 0,
+    lng: Number(latlng?.split(",")?.[1]) || 0,
   });
-  const inputRef = useRef<any>();
+  const inputRef = useRef<any>(undefined);
   const { isSuccess } = useQuery(["shopZones", location], () =>
     shopService.checkZone({
-      address: { latitude: location.lat, longitude: location.lng },
+      address: { latitude: location?.lat, longitude: location?.lng },
     }),
   );
 
@@ -100,7 +95,11 @@ export default function AddressModal({
       updateUserAddress(
         {
           title: values.title,
-          location: [location.lat, location.lng],
+          // location: [location.lat, location.lng],
+          location: {
+            latitude: location?.lat || 0,
+            longitude: location?.lng || 0,
+          },
           address: {
             address: inputRef.current?.value || "",
             floor: values.floor,
@@ -133,7 +132,11 @@ export default function AddressModal({
       createAddress(
         {
           title: values.title,
-          location: [location.lat, location.lng],
+          // location: [location.lat, location.lng],
+          location: {
+            latitude: location?.lat || 0,
+            longitude: location?.lng || 0,
+          },
           address: {
             address: inputRef.current?.value || "",
             floor: values.floor,

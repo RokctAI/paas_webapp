@@ -62,7 +62,7 @@ export default function MemberProductSingle({ handleClose, uuid }: Props) {
     {
       enabled: Boolean(uuid),
       select: (data) => data.data,
-    },
+    }
   );
 
   const { isLoading, mutate } = useMutation({
@@ -98,7 +98,7 @@ export default function MemberProductSingle({ handleClose, uuid }: Props) {
   const handleExtrasClick = (e: any) => {
     setSelectedAddons([]);
     const index = extrasIds.findIndex(
-      (item) => item.extra_group_id === e.extra_group_id,
+      (item) => item.extra_group_id === e.extra_group_id
     );
     let array = extrasIds;
     if (index > -1) array = array.slice(0, index);
@@ -110,7 +110,7 @@ export default function MemberProductSingle({ handleClose, uuid }: Props) {
       const index = extrasIds.findIndex((item) =>
         element[0].extra_group_id != e.extra_group_id
           ? item.extra_group_id === element[0].extra_group_id
-          : item.extra_group_id === e.extra_group_id,
+          : item.extra_group_id === e.extra_group_id
       );
       if (element[0].level >= e.level) {
         var itemData =
@@ -196,7 +196,7 @@ export default function MemberProductSingle({ handleClose, uuid }: Props) {
       (total, item) =>
         (total +=
           Number(item.stock?.total_price) * Number(item.stock?.quantity)),
-      0,
+      0
     );
     return addonPrice + Number(showExtras.stock.total_price) * counter;
   }

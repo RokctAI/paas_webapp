@@ -56,7 +56,7 @@ export default function ParcelForm({
           locationKey="location_from"
           addressKey="address_from"
           icon={<PickupFromIcon />}
-          label={t("pickup.from")}
+          label={t('pickup.from')}
           type="outlined"
         />
       </Grid>
@@ -82,7 +82,7 @@ export default function ParcelForm({
           options={types}
           onChange={(event: any) => {
             const findedType = types.find(
-              (type) => type.value.toString() === event.target.value,
+              (type) => type.value.toString() === event.target.value
             )?.data;
             if (findedType) {
               handleSelectType(findedType);

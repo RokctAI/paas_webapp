@@ -118,7 +118,7 @@ export default function ParcelSenderForm({ formik }: Props) {
         onClose={handleCloseAddressModal}
         latlng={location_from}
         fullScreen={!isDesktop}
-        title={"select.address"}
+        title={'select.address'}
       />
     </>
   );

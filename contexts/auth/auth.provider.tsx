@@ -7,7 +7,7 @@ import {
   OAuthProvider,
   signInWithPhoneNumber,
 } from "firebase/auth";
-import { auth } from "services/firebase";
+import firebaseApp, { auth } from "services/firebase";
 import { AuthContext } from "./auth.context";
 import { removeCookie, setCookie } from "utils/session";
 import { useSettings } from "contexts/settings/settings.context";
@@ -88,17 +88,17 @@ export function AuthProvider({ children, authState }: Props) {
     return signInWithPopup(auth, appleAuthProvider);
   }
 
-  function phoneNumberSignIn(phoneNumber) {
-    const appVerifier = new RecaptchaVerifier(
-      "sign-in-button",
-      {
-        size: "invisible",
-        callback: () => {
-          console.log("Callback!");
-        },
-      },
-      auth,
+  async function phoneNumberSignIn(phoneNumber) {
+    const { getAuth, signInWithPhoneNumber, RecaptchaVerifier } = await import(
+      "firebase/auth"
     );
+    const auth = getAuth(firebaseApp);
+    const appVerifier = new RecaptchaVerifier(auth, "sign-in-button", {
+      size: "invisible",
+      callback: () => {
+        console.log("Callback!");
+      },
+    });
     return signInWithPhoneNumber(auth, phoneNumber, appVerifier);
   }
 

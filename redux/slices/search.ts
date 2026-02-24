@@ -16,7 +16,7 @@ const searchSlice = createSlice({
     addToSearch(state, action) {
       const { payload } = action;
       const existingIndex = state.searchHistory.findIndex(
-        (item) => item === payload,
+        (item) => item === payload
       );
       if (existingIndex < 0) {
         state.searchHistory.unshift(payload);
@@ -30,7 +30,7 @@ const searchSlice = createSlice({
       state.searchHistory.map((item) => {
         if (item === payload) {
           const nextCartItems = state.searchHistory.filter(
-            (item) => item !== payload,
+            (item) => item !== payload
           );
           state.searchHistory = nextCartItems;
         }

@@ -8,6 +8,7 @@ import SecondaryButton from "components/button/secondaryButton";
 import { warning } from "components/alert/toast";
 import { useAppDispatch } from "hooks/useRedux";
 import { useTranslation } from "react-i18next";
+import Image from "next/image";
 
 type Props = {
   url: string;
@@ -19,7 +20,7 @@ type Props = {
 
 export default function UploadMedia({
   url,
-  setPercent = (num: number) => {},
+  setPercent = (_: number) => {},
   file,
   handleOnSubmit,
   handleClose,
@@ -59,7 +60,16 @@ export default function UploadMedia({
   return (
     <div className="upload-media">
       <div className="upload-form">
-        <img src={url} />
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            height: "200px",
+            marginBottom: "20px",
+          }}
+        >
+          <Image fill src={url} alt="media" />
+        </div>
         <div>
           <TextInput
             label="Caption"

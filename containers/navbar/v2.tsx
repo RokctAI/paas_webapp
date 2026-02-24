@@ -15,12 +15,12 @@ import ArrowDownSLineIcon from "remixicon-react/ArrowDownSLineIcon";
 
 const PopoverContainer = dynamic(() => import("containers/popover/popover"));
 const CategoryDropdown = dynamic(
-  () => import("components/categoryDropdown/categoryDropdown"),
+  () => import("components/categoryDropdown/categoryDropdown")
 );
 
 type Props = {
   categories: Category[];
-  data?: Category;
+  data?: Category
 };
 
 export default function Navbar({ categories = [], data }: Props) {
@@ -120,10 +120,7 @@ export default function Navbar({ categories = [], data }: Props) {
         anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <ShopFilter
-          parentCategoryId={data?.id}
-          handleClose={handleCloseFilter}
-        />
+        <ShopFilter parentCategoryId={data?.id} handleClose={handleCloseFilter} />
       </PopoverContainer>
       <PopoverContainer
         open={openSorting}

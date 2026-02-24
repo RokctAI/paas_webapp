@@ -3,7 +3,7 @@ import CloseFillIcon from "remixicon-react/CloseFillIcon";
 import cls from "./alert.module.scss";
 
 type Props = {
-  icon: React.ReactElement;
+  icon: React.ReactElement<any>;
   message: React.ReactNode;
   closeToast?: () => void;
   type: "success" | "warning" | "error" | "info";
