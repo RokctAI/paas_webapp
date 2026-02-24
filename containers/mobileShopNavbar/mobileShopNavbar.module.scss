@@ -1,0 +1,133 @@
+.container {
+  position: sticky;
+  top: 70px;
+  z-index: 10;
+  background-color: var(--secondary-bg);
+  padding: 10px 30px;
+  display: flex;
+  column-gap: 10px;
+
+  @media (max-width: 1140px) {
+    padding: 10px;
+    top: 0;
+  }
+
+  .iconBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      width: 22px;
+      height: 22px;
+      transition: all 0.2s;
+    }
+    &:hover {
+      svg {
+        fill: var(--primary);
+      }
+    }
+  }
+
+  .wrapper {
+    width: 100%;
+
+    .showAllBtn {
+      display: flex;
+      align-items: center;
+      column-gap: 5px;
+
+      .text {
+        font-size: 16px;
+        line-height: 19px;
+        font-weight: 600;
+        color: var(--black);
+      }
+
+      svg {
+        width: 16px;
+        height: 16px;
+        fill: var(--black);
+      }
+    }
+  }
+}
+
+.categorySlide {
+  width: fit-content;
+  margin: 10px 0;
+}
+
+.categoryItem {
+  display: flex;
+  align-items: center;
+  column-gap: 5px;
+  padding: 10px 15px;
+  border-radius: 50px;
+  font-size: 16px;
+  line-height: 17px;
+  font-weight: 600;
+  color: var(--black);
+  cursor: pointer;
+  transition: background-color 0.3s;
+  background-color: var(--secondary-bg);
+  border: 1px solid var(--primary-bg);
+
+  &:global(.active) {
+    background-color: var(--primary-bg);
+  }
+
+  @media (max-width: 1799px) {
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+}
+
+.loadingContainer {
+  position: sticky;
+  top: 70px;
+  z-index: 10;
+  background-color: var(--secondary-bg);
+  padding: 20px 30px;
+  display: flex;
+  column-gap: 10px;
+
+  @media (max-width: 1140px) {
+    padding: 10px;
+    top: 0;
+  }
+
+  .iconBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    svg {
+      width: 22px;
+      height: 22px;
+      transition: all 0.2s;
+    }
+    &:hover {
+      svg {
+        fill: var(--primary);
+      }
+    }
+  }
+
+  .body {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+
+    .item {
+      height: 39px;
+      width: 83px;
+      border-radius: 50px;
+      border: 1px solid var(--primary-bg);
+      background-color: var(--grey);
+
+      @media (max-width: 1799px) {
+        height: 29px;
+        width: 73px;
+      }
+    }
+  }
+}

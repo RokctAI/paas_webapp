@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  @media (max-width: 1139px) {
+    display: block;
+  }
+  .main {
+    width: 74%;
+    @media (max-width: 1139px) {
+      width: 100%;
+    }
+  }
+  .cart {
+    flex: 0 0 26%;
+    height: calc(100vh - 70px);
+    position: sticky;
+    top: 70px;
+    right: 0;
+    bottom: 0;
+    z-index: 11;
+    @media (max-width: 1139px) {
+      display: none;
+    }
+  }
+}
