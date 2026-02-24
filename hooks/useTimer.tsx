@@ -17,7 +17,7 @@ export default function useTimer(duration: number) {
             }
             return updatedTime;
           }),
-        1000
+        1000,
       );
     }
     return () => {

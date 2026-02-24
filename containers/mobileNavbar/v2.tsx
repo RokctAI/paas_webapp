@@ -14,12 +14,12 @@ const MobileDrawer = dynamic(() => import("containers/drawer/mobileDrawer"));
 const ShopFilter = dynamic(() => import("components/shopFilter/shopFilter"));
 const ShopSorting = dynamic(() => import("components/shopSorting/shopSorting"));
 const MobileShopCategories = dynamic(
-  () => import("components/mobileShopCategories/v2")
+  () => import("components/mobileShopCategories/v2"),
 );
 
 type Props = {
   categories: Category[];
-  data?: Category
+  data?: Category;
 };
 
 export default function MobileNavbar({ categories = [], data }: Props) {
@@ -61,7 +61,12 @@ export default function MobileNavbar({ categories = [], data }: Props) {
       </MobileDrawer>
 
       <MobileDrawer open={openFilter} onClose={handleCloseFilter}>
-        {openFilter && <ShopFilter parentCategoryId={data?.id} handleClose={handleCloseFilter} />}
+        {openFilter && (
+          <ShopFilter
+            parentCategoryId={data?.id}
+            handleClose={handleCloseFilter}
+          />
+        )}
       </MobileDrawer>
 
       <MobileDrawer open={sortingDrawer} onClose={handleCloseSorting}>

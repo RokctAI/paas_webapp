@@ -14,7 +14,9 @@ import dynamic from "next/dynamic";
 import useModal from "hooks/useModal";
 
 type Props = {};
-const ParcelReview = dynamic(() => import('containers/parcelReviewContainer/parcelReviewContainer'))
+const ParcelReview = dynamic(
+  () => import("containers/parcelReviewContainer/parcelReviewContainer"),
+);
 
 export default function ParcelSingle({}: Props) {
   const { locale } = useLocale();
@@ -37,7 +39,7 @@ export default function ParcelSingle({}: Props) {
           dispatch(setRoleId(data.data.deliveryman.id));
         }
       },
-    }
+    },
   );
 
   useEffect(() => {
@@ -70,7 +72,7 @@ export default function ParcelSingle({}: Props) {
         />
         <ParcelContainer data={data?.data} loading={isLoading} />
       </div>
-      <ParcelReview open={openModal} onClose={handleClose} refetch={refetch}  />
+      <ParcelReview open={openModal} onClose={handleClose} refetch={refetch} />
     </>
   );
 }

@@ -8,7 +8,11 @@ const bannerService = {
     request.get(`/rest/banners/${id}`, { params }),
   getAllAds: (params?: any): Promise<Paginate<Banner>> =>
     request.get("/rest/banners-ads", { params }),
-  getAdById: (id: string, params?: any): Promise<SuccessResponse<{banner: Banner, shops: IShop[]}>> => request.get(`/rest/banners-ads/${id}`, {params})
+  getAdById: (
+    id: string,
+    params?: any,
+  ): Promise<SuccessResponse<{ banner: Banner; shops: IShop[] }>> =>
+    request.get(`/rest/banners-ads/${id}`, { params }),
 };
 
 export default bannerService;

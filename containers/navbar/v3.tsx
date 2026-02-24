@@ -133,11 +133,19 @@ export default function Navbar({ data }: Props) {
           anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
           transformOrigin={{ vertical: "top", horizontal: "right" }}
         >
-          <ShopFilter parentCategoryId={data?.id} handleClose={handleCloseFilter} />
+          <ShopFilter
+            parentCategoryId={data?.id}
+            handleClose={handleCloseFilter}
+          />
         </PopoverContainer>
       ) : (
         <MobileDrawer open={openFilter} onClose={handleCloseFilter}>
-          {openFilter && <ShopFilter parentCategoryId={data?.id} handleClose={handleCloseFilter} />}
+          {openFilter && (
+            <ShopFilter
+              parentCategoryId={data?.id}
+              handleClose={handleCloseFilter}
+            />
+          )}
         </MobileDrawer>
       )}
       {isDesktop ? (

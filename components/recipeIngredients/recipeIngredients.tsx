@@ -25,10 +25,10 @@ import useRouterStatus from "hooks/useRouterStatus";
 import { useRouter } from "next/router";
 
 const CartReplaceModal = dynamic(
-  () => import("components/clearCartModal/cartReplacePrompt")
+  () => import("components/clearCartModal/cartReplacePrompt"),
 );
 const SuccessModal = dynamic(
-  () => import("components/successModal/successModal")
+  () => import("components/successModal/successModal"),
 );
 
 type Props = { data?: IRecipe };

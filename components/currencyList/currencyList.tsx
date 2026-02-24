@@ -20,7 +20,7 @@ export default function CurrencyList({ onClose }: Props) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const currencyId = event.target.value;
     const activeCurrency = data?.data?.find(
-      (item: Currency) => item.id === Number(currencyId)
+      (item: Currency) => item.id === Number(currencyId),
     );
     dispatch(setCurrency(activeCurrency));
     onClose();

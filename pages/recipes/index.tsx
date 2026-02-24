@@ -26,7 +26,7 @@ export default function Recipes({}: Props) {
   const loader = useRef(null);
 
   const { data: categories } = useQuery(["recipeCategories", locale], () =>
-    categoryService.getAllRecipeCategories({ perPage: 100 })
+    categoryService.getAllRecipeCategories({ perPage: 100 }),
   );
 
   const {
@@ -52,7 +52,7 @@ export default function Recipes({}: Props) {
         }
         return undefined;
       },
-    }
+    },
   );
   const recipes = data?.pages?.flatMap((item) => item.data) || [];
 
@@ -63,7 +63,7 @@ export default function Recipes({}: Props) {
         fetchNextPage();
       }
     },
-    [fetchNextPage, hasNextPage]
+    [fetchNextPage, hasNextPage],
   );
 
   useEffect(() => {

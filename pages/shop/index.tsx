@@ -9,7 +9,7 @@ const uiTypes = {
   "1": dynamic(() => import("containers/shops/shopsPage")),
   "2": dynamic(() => import("containers/shops/v2")),
   "3": dynamic(() => import("containers/shops/v3")),
-  "4": dynamic(() => import("containers/shops/v4"))
+  "4": dynamic(() => import("containers/shops/v4")),
 };
 
 type PageProps = {

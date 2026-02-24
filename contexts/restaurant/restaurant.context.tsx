@@ -12,7 +12,7 @@ type RestaurantContextType = {
 };
 
 export const RestaurantContext = createContext<RestaurantContextType>(
-  {} as RestaurantContextType
+  {} as RestaurantContextType,
 );
 
 export const useRestaurant = () => useContext(RestaurantContext);

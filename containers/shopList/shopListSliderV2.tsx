@@ -13,7 +13,7 @@ const settings = {
   spaceBetween: 10,
   preloadImages: false,
   className: "shop-list full-width",
-  slidesPerView: 'auto' as 'auto',
+  slidesPerView: "auto" as "auto",
   breakpoints: {
     1140: {
       slidesPerView: 4,

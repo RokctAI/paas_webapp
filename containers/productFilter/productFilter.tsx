@@ -37,14 +37,14 @@ export default function ProductFilter({ open, handleClose }: Props) {
   const { t } = useTranslation();
   const { query, replace } = useRouter();
   const [selectedSortOption, setSelectedSortOption] = useState(
-    (query?.sort as string) || sortOptions[0].value
+    (query?.sort as string) || sortOptions[0].value,
   );
   const [selectedBrands, setSelectedBrands] = useState<string[]>(
     Array.isArray(query?.brands)
       ? query?.brands
       : query?.brands
-      ? [query?.brands as string]
-      : []
+        ? [query?.brands as string]
+        : [],
   );
 
   const { data: brands, isLoading: brandsLoading } = useQuery(
@@ -57,7 +57,7 @@ export default function ProductFilter({ open, handleClose }: Props) {
       }),
     {
       enabled: open,
-    }
+    },
   );
 
   const handlSelectBrand = (brand: IBrand) => {
@@ -65,7 +65,7 @@ export default function ProductFilter({ open, handleClose }: Props) {
       setSelectedBrands(
         (oldBrands) =>
           oldBrands?.filter((oldBrand) => oldBrand !== brand.id.toString()) ||
-          []
+          [],
       );
     } else {
       setSelectedBrands((oldBrands) => [...oldBrands, brand.id.toString()]);
@@ -93,7 +93,7 @@ export default function ProductFilter({ open, handleClose }: Props) {
     if (selectedSortOption !== "standard") {
       params.sort = selectedSortOption;
     }
-    replace({ query: params }, undefined, { shallow: true});
+    replace({ query: params }, undefined, { shallow: true });
     handleClose();
   };
 

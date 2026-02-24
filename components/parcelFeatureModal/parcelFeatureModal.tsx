@@ -6,7 +6,7 @@ const Wrapper = styled(Dialog)(() => ({
   "& .MuiBackdrop-root": {
     backgroundColor: "rgba(0, 0, 0, 0.15)",
     transform: "translate3d(0, 0, 0)",
-    backdropFilter: "blur(25px)"
+    backdropFilter: "blur(25px)",
   },
   "& .MuiPaper-root": {
     backgroundColor: "var(--secondary-bg)",

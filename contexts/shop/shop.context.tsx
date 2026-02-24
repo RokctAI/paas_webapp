@@ -13,7 +13,7 @@ type ShopContextType = {
 };
 
 export const ShopContext = createContext<ShopContextType>(
-  {} as ShopContextType
+  {} as ShopContextType,
 );
 
 export const useShop = () => useContext(ShopContext);

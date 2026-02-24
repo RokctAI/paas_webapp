@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default function calculateCartProductTotal(
-  data: CartStockWithProducts
+  data: CartStockWithProducts,
 ): Props {
   if (!data) {
     return {
@@ -30,7 +30,7 @@ export default function calculateCartProductTotal(
     data?.addons?.reduce(
       (total, item) =>
         (total += Number(item.stock?.total_price) * item.quantity),
-      0
+      0,
     ) || 0;
   const productTotal = Number(data.stock?.total_price) * data.quantity;
   const productDiscount = Number(data.discount) * data.quantity;

@@ -49,7 +49,7 @@ export default function SearchResult({
         fetchShopsNextPage();
       }
     },
-    [hasShopsNextPage, fetchShopsNextPage]
+    [hasShopsNextPage, fetchShopsNextPage],
   );
 
   useEffect(() => {
@@ -69,7 +69,7 @@ export default function SearchResult({
         fetchProductsNextPage();
       }
     },
-    [hasProductsNextPage, fetchProductsNextPage]
+    [hasProductsNextPage, fetchProductsNextPage],
   );
 
   useEffect(() => {
