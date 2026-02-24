@@ -29,11 +29,11 @@ import CheckLineIcon from "remixicon-react/CheckLineIcon";
 import EditLineIcon from "remixicon-react/EditLineIcon";
 
 const DeliveryTimes = dynamic(
-  () => import("components/deliveryTimes/deliveryTimes")
+  () => import("components/deliveryTimes/deliveryTimes"),
 );
 const MobileDrawer = dynamic(() => import("containers/drawer/mobileDrawer"));
 const DeliveryTimePopover = dynamic(
-  () => import("components/deliveryTimePopover/deliveryTimePopover")
+  () => import("components/deliveryTimePopover/deliveryTimePopover"),
 );
 const ModalContainer = dynamic(() => import("containers/modal/modal"));
 const DrawerContainer = dynamic(() => import("containers/drawer/drawer"));
@@ -62,7 +62,7 @@ export default function CheckoutPickupForm({
   const { delivery_date, delivery_time, address, location } = formik.values;
   const isToday = dayjs(delivery_date).isSame(dayjs().format("YYYY-MM-DD"));
   const isTomorrow = dayjs(delivery_date).isSame(
-    dayjs().add(1, "day").format("YYYY-MM-DD")
+    dayjs().add(1, "day").format("YYYY-MM-DD"),
   );
   const day = dayjs(delivery_date).format("ddd");
 
@@ -88,7 +88,7 @@ export default function CheckoutPickupForm({
         }
         return undefined;
       },
-    }
+    },
   );
 
   if (error) {

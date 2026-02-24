@@ -44,14 +44,8 @@ const Input = styled(TextField)({
   },
 });
 
-export default function TextArea(
-  props: TextFieldProps
-) {
+export default function TextArea(props: TextFieldProps) {
   return (
-    <Input
-      variant="standard"
-      InputLabelProps={{ shrink: true }}
-      {...props}
-    />
+    <Input variant="standard" InputLabelProps={{ shrink: true }} {...props} />
   );
 }

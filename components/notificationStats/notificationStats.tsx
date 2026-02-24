@@ -26,7 +26,7 @@ export default function NotificationStats({}: Props) {
       refetchInterval: 10000,
       refetchOnWindowFocus: isAuthenticated,
       staleTime: 0,
-    }
+    },
   );
 
   return (

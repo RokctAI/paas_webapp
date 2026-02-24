@@ -7,9 +7,12 @@ import dynamic from "next/dynamic";
 import FallbackImage from "components/fallbackImage/fallbackImage";
 import { useTranslation } from "react-i18next";
 
-const StoryContainer = dynamic(() => import("components/parcelFeatureContainer/parcelFeatureContainer"), {
-  ssr: false,
-});
+const StoryContainer = dynamic(
+  () => import("components/parcelFeatureContainer/parcelFeatureContainer"),
+  {
+    ssr: false,
+  },
+);
 
 type Props = {
   data: IParcelFeature[];
@@ -18,11 +21,9 @@ type Props = {
 
 export default function ParcelFeatureSingle({ data, list }: Props) {
   const [open, handleOpen, handleClose] = useModal();
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const firstStory = data[0];
-  const filteredList = list.filter(
-    (item) => item[0]?.id !== firstStory?.id
-  );
+  const filteredList = list.filter((item) => item[0]?.id !== firstStory?.id);
 
   const goToStory = (event: React.MouseEvent<HTMLElement>) => {
     event.preventDefault();
@@ -31,7 +32,7 @@ export default function ParcelFeatureSingle({ data, list }: Props) {
 
   return (
     <>
-      {(
+      {
         <Link href="/" className={cls.story} onClick={goToStory}>
           <div className={cls.wrapper}>
             <span className={cls.title}>{t(firstStory.title)}</span>
@@ -45,7 +46,7 @@ export default function ParcelFeatureSingle({ data, list }: Props) {
             />
           </div>
         </Link>
-      )}
+      }
       {open && (
         <StoryContainer
           open={open}

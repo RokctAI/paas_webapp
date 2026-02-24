@@ -13,7 +13,7 @@ export default function Notification({}: Props) {
   const locale = i18n.language;
 
   const { data, isLoading } = useQuery(["notifications", locale], () =>
-    profileService.getNotifications()
+    profileService.getNotifications(),
   );
 
   return (

@@ -18,7 +18,7 @@ type Props = {
   label: string;
   value: string;
   error?: boolean;
-  accept?: string
+  accept?: string;
 };
 
 export default function ImageUpload({
@@ -27,9 +27,9 @@ export default function ImageUpload({
   label,
   value,
   error,
-  accept
+  accept,
 }: Props) {
-  const {t} = useTranslation()
+  const { t } = useTranslation();
   const { mutate: upload, isLoading: isUploading } = useMutation({
     mutationFn: (data: any) => galleryService.upload(data),
     onSuccess: (data) => {
@@ -39,10 +39,10 @@ export default function ImageUpload({
 
   const handleChange = (event: any) => {
     const file = event.target.files[0];
-    if(file.size > 2097152){
-      errorToast(t('file.size.should.be.less.than.2mb'))
-      return
-   };
+    if (file.size > 2097152) {
+      errorToast(t("file.size.should.be.less.than.2mb"));
+      return;
+    }
     const formData = new FormData();
     formData.append("image", file);
     formData.append("type", "shops");
@@ -77,7 +77,13 @@ export default function ImageUpload({
       ) : (
         <label htmlFor="file" className={cls.fileInput}>
           <div className={`${cls.uploadButton} ${error ? cls.error : ""}`}>
-            <input hidden id="file" type="file" accept={accept} onChange={handleChange} />
+            <input
+              hidden
+              id="file"
+              type="file"
+              accept={accept}
+              onChange={handleChange}
+            />
             <UploadCloud2LineIcon className={cls.icon} />
             <p className={cls.text}>{label}</p>
             {isUploading && <Loading />}

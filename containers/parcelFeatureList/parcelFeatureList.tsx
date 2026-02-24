@@ -20,15 +20,15 @@ const storySettings = {
       spaceBetween: 20,
     },
     992: {
-      slidesPerView: 3.5
+      slidesPerView: 3.5,
     },
     576: {
       slidesPerView: 2.5,
-      spaceBetween: 10
+      spaceBetween: 10,
     },
     0: {
-      slidesPerView: 2.1
-    }
+      slidesPerView: 2.1,
+    },
   },
 };
 

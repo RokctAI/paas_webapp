@@ -9,7 +9,7 @@ export type CurrencyType = {
 
 const initialState: CurrencyType = {
   currency: null,
-  defaultCurrency: null
+  defaultCurrency: null,
 };
 
 const currencySlice = createSlice({
@@ -21,8 +21,8 @@ const currencySlice = createSlice({
       state.currency = payload;
     },
     setDefaultCurrency(state, action) {
-      const {payload} = action;
-      state.defaultCurrency = payload
+      const { payload } = action;
+      state.defaultCurrency = payload;
     },
     clearCurrency(state) {
       state.currency = null;
@@ -30,7 +30,8 @@ const currencySlice = createSlice({
   },
 });
 
-export const { setCurrency, clearCurrency, setDefaultCurrency } = currencySlice.actions;
+export const { setCurrency, clearCurrency, setDefaultCurrency } =
+  currencySlice.actions;
 
 export const selectCurrency = (state: RootState) => state.currency.currency;
 

@@ -376,7 +376,7 @@ declare namespace googleMapReact {
 
   function fitBounds(
     bounds: NESWBounds,
-    size: Size
+    size: Size,
   ): {
     center: { lat: number; lng: number };
     zoom: number;
@@ -386,7 +386,7 @@ declare namespace googleMapReact {
   function meters2ScreenPixels(
     meters: number,
     coords: Coords,
-    zoom: number
+    zoom: number,
   ): { w: number; h: number };
 
   function tile2LatLng(point: Point, zoom: number): { coords: Coords };
@@ -395,7 +395,7 @@ declare namespace googleMapReact {
 
   function getTilesIds(
     start: { from: number; to: number },
-    zoom: number
+    zoom: number,
   ): Tile[];
 }
 

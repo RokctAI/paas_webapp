@@ -5,7 +5,7 @@ import roundedDeliveryTime from "./roundedDeliveryTime";
 
 function getSchedule(day: Dayjs, data: IShop) {
   return data?.shop_working_days?.find(
-    (item) => item.day?.toLowerCase() === day.format("dddd").toLowerCase()
+    (item) => item.day?.toLowerCase() === day.format("dddd").toLowerCase(),
   );
 }
 
@@ -22,7 +22,7 @@ export default function getFirstReservationDate(data: IShop) {
         time = roundedDeliveryTime(
           dayjs().add(index, "day"),
           beforeReservationTime,
-          roundBy
+          roundBy,
         );
       } else {
         const day = dayjs().add(index, "day");
@@ -31,7 +31,7 @@ export default function getFirstReservationDate(data: IShop) {
         time = roundedDeliveryTime(
           dayjs(`${date} ${openTime}`),
           beforeReservationTime,
-          roundBy
+          roundBy,
         );
       }
       break;

@@ -14,19 +14,19 @@ const MobileDrawer = dynamic(() => import("containers/drawer/mobileDrawer"));
 const ShopFilter = dynamic(() => import("components/shopFilter/shopFilter"));
 const ShopSorting = dynamic(() => import("components/shopSorting/shopSorting"));
 const MobileShopCategories = dynamic(
-  () => import("components/mobileShopCategories/mobileShopCategories")
+  () => import("components/mobileShopCategories/mobileShopCategories"),
 );
 
 type Props = {
   categories?: Category[];
   hideCategories?: boolean;
-  data?: Category
+  data?: Category;
 };
 
 export default function MobileNavbar({
   categories = [],
   hideCategories,
-  data
+  data,
 }: Props) {
   const { t } = useTranslation();
   const [visible, handleOpenCategories, handleCloseCategories] = useModal();
@@ -44,8 +44,8 @@ export default function MobileNavbar({
                 ? categories.find((item) => item.id === category_id)
                     ?.translation?.title
                 : newest
-                ? t("new")
-                : t("all")}
+                  ? t("new")
+                  : t("all")}
             </span>
             <ArrowDownSLineIcon />
           </button>
@@ -70,7 +70,12 @@ export default function MobileNavbar({
       </MobileDrawer>
 
       <MobileDrawer open={openFilter} onClose={handleCloseFilter}>
-        {openFilter && <ShopFilter parentCategoryId={data?.id} handleClose={handleCloseFilter} />}
+        {openFilter && (
+          <ShopFilter
+            parentCategoryId={data?.id}
+            handleClose={handleCloseFilter}
+          />
+        )}
       </MobileDrawer>
 
       <MobileDrawer open={sortingDrawer} onClose={handleCloseSorting}>

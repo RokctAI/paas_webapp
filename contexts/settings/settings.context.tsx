@@ -9,11 +9,11 @@ type SettingsContextType = {
   location: string;
   updateLocation: (data?: any) => void;
   updateLocationId: (data: string) => void;
-  location_id: string
+  location_id: string;
 };
 
 export const SettingsContext = createContext<SettingsContextType>(
-  {} as SettingsContextType
+  {} as SettingsContextType,
 );
 
 export const useSettings = () => useContext(SettingsContext);

@@ -44,7 +44,7 @@ export default function SearchContainer({ searchContainerRef }: Props) {
     () => shopService.getById(shopId),
     {
       enabled: isRestaurantRoute,
-    }
+    },
   );
 
   const {
@@ -71,7 +71,7 @@ export default function SearchContainer({ searchContainerRef }: Props) {
       },
       retry: false,
       enabled: !!debouncedSearchTerm && !isRestaurantRoute,
-    }
+    },
   );
 
   const {
@@ -101,7 +101,7 @@ export default function SearchContainer({ searchContainerRef }: Props) {
       onSuccess: () => {
         dispatch(addToSearch(debouncedSearchTerm));
       },
-    }
+    },
   );
 
   const resetSearch = () => setSearchTerm("");

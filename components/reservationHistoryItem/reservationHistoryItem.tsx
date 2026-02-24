@@ -26,7 +26,9 @@ export default function ReservationHistoryItem({ data, dataIdx }: Props) {
           </div>
         </Grid>
         <Grid item sm={4} md={3} lg={2}>
-          <h3 className={cls.title}>{data?.booking?.shop?.translation?.title}</h3>
+          <h3 className={cls.title}>
+            {data?.booking?.shop?.translation?.title}
+          </h3>
           <p className={cls.text}>{t("shop")}</p>
         </Grid>
         <Grid item sm={4} md={3} lg={2}>

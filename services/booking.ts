@@ -21,12 +21,12 @@ const bookingService = {
     request.get(`/rest/booking/shop-sections`, { params }),
   getZoneById: (
     id: number,
-    params?: any
+    params?: any,
   ): Promise<SuccessResponse<IBookingZone>> =>
     request.get(`/rest/booking/shop-sections/${id}`, { params }),
   getBookingSchedule: (
     id: number,
-    params?: any
+    params?: any,
   ): Promise<SuccessResponse<IBookingSchedule>> =>
     request.get(`/rest/booking/shops/${id}`, { params }),
   getBookingHistory: (params?: any): Promise<Paginate<IBooking>> =>

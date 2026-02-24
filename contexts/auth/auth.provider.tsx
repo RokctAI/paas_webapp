@@ -89,9 +89,8 @@ export function AuthProvider({ children, authState }: Props) {
   }
 
   async function phoneNumberSignIn(phoneNumber) {
-    const { getAuth, signInWithPhoneNumber, RecaptchaVerifier } = await import(
-      "firebase/auth"
-    );
+    const { getAuth, signInWithPhoneNumber, RecaptchaVerifier } =
+      await import("firebase/auth");
     const auth = getAuth(firebaseApp);
     const appVerifier = new RecaptchaVerifier(auth, "sign-in-button", {
       size: "invisible",

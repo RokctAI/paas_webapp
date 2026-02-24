@@ -12,7 +12,7 @@ export default function Referrals({}: Props) {
   const locale = i18n.language;
 
   const { data, isLoading } = useQuery(["referrals", locale], () =>
-    informationService.getReferrals()
+    informationService.getReferrals(),
   );
 
   return (

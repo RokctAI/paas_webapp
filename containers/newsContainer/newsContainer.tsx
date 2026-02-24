@@ -21,7 +21,7 @@ export default function NewsContainer({}: Props) {
     () => blogService.getNewsById(blogId),
     {
       enabled: Boolean(blogId),
-    }
+    },
   );
 
   const handleClose = () => {
@@ -32,13 +32,13 @@ export default function NewsContainer({}: Props) {
           JSON.stringify({
             ...query,
             news: undefined,
-          })
+          }),
         ),
       },
       undefined,
       {
         shallow: true,
-      }
+      },
     );
   };
 

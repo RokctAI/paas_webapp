@@ -3,7 +3,7 @@ import { IShop } from "interfaces";
 
 function getSchedule(day: Dayjs, data?: IShop) {
   return data?.shop_working_days?.find(
-    (item) => item.day?.toLowerCase() === day.format("dddd").toLowerCase()
+    (item) => item.day?.toLowerCase() === day.format("dddd").toLowerCase(),
   );
 }
 
@@ -14,7 +14,7 @@ export default function checkIsDisabledDay(dayIndex: number, data?: IShop) {
   let isTimeAfter = false;
   const foundedSchedule = getSchedule(day, data);
   const isHoliday = data?.shop_closed_date?.some((item) =>
-    dayjs(item.day).isSame(day.format("YYYY-MM-DD"))
+    dayjs(item.day).isSame(day.format("YYYY-MM-DD")),
   );
   if (today) {
     const closedTime = foundedSchedule?.to.replace("-", ":");

@@ -48,7 +48,7 @@ export default function BannerSinglePage({}: Props) {
         }
         return undefined;
       },
-    }
+    },
   );
   const pages = data?.pages?.flatMap((item) => item.data);
   const banner = pages ? pages[0] : {};
@@ -60,7 +60,7 @@ export default function BannerSinglePage({}: Props) {
         fetchNextPage();
       }
     },
-    [fetchNextPage, hasNextPage]
+    [fetchNextPage, hasNextPage],
   );
 
   useEffect(() => {
@@ -106,7 +106,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const locale = getLanguage(req.cookies?.locale);
 
   await queryClient.prefetchInfiniteQuery(["banner", bannerId, locale], () =>
-    bannerService.getById(bannerId, { perPage: PER_PAGE })
+    bannerService.getById(bannerId, { perPage: PER_PAGE }),
   );
 
   return {

@@ -38,7 +38,7 @@ export default function ShopInfo({ data }: Props) {
         delivery_time: time,
         delivery_date: date,
         shop_id: data?.id,
-      })
+      }),
     );
   };
 
