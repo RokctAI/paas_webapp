@@ -77,6 +77,7 @@ export default function VerifyCodeForm({}: Props) {
 
   useEffect(() => {
     timerStart();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

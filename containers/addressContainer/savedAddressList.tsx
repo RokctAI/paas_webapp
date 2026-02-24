@@ -26,19 +26,19 @@ export default function SavedAddressList({
   const { updateAddress, updateLocation, updateLocationId } = useSettings();
   const queryClient = useQueryClient();
   const handleChange = (item: IAddress) => {
-    updateAddress(item.address?.address);
-    updateLocation(item.location.join(","));
-    updateLocationId(item.id.toString());
+    updateAddress(item?.address?.address);
+    updateLocation(`${item?.location?.latitude},${item?.location?.longitude}`);
+    updateLocationId(item?.id?.toString());
   };
 
   const controlProps = (item: IAddress) => ({
     checked: Boolean(item.active),
     onChange: () => {
       handleChange(item);
-      setActive(item.id);
+      setActive(item?.id);
       handleCloseList();
     },
-    value: String(item.id),
+    value: String(item?.id),
     id: String(item.id),
     name: "addrss",
     inputProps: { "aria-label": String(item.id) },
@@ -57,9 +57,9 @@ export default function SavedAddressList({
           .flatMap((addressList) => addressList)
           .map((oldAddress) => {
             if (oldAddress.id === id) {
-              updateAddress(oldAddress.address?.address);
+              updateAddress(oldAddress?.address?.address);
               updateLocation(
-                `${oldAddress.location.at(0)},${oldAddress.location.at(1)}`,
+                `${oldAddress?.location?.latitude},${oldAddress?.location?.longitude}`,
               );
               return { ...oldAddress, active: true };
             }

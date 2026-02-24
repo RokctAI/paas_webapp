@@ -3,7 +3,6 @@ import cls from "./parcelFeatureItem.module.scss";
 import { IParcelFeature } from "interfaces";
 import CloseFillIcon from "remixicon-react/CloseFillIcon";
 import Image from "next/image";
-import { useTranslation } from "react-i18next";
 import FeatureLine from "./featureLine";
 import useTimer from "hooks/useTimer";
 import { STORY_DURATION } from "constants/story";
@@ -24,7 +23,6 @@ export default function ParcelFeatureItem({
   currentIndex,
   storyNext,
 }: Props) {
-  const { t } = useTranslation();
   const time = useTimer(STORY_DURATION);
   const swiper = useSwiper();
 
@@ -32,6 +30,7 @@ export default function ParcelFeatureItem({
     if (!time) {
       storyNext(swiper);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [time]);
 
   return (

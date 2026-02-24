@@ -1,38 +1,28 @@
-import React, { useContext } from "react";
 import RadioInput from "components/inputs/radioInput";
 import cls from "./languagePopover.module.scss";
 import { Langauge } from "interfaces";
-import i18n from "i18n";
 import { useQuery } from "react-query";
 import languageService from "services/language";
-import translationService from "services/translations";
-import { ThemeContext } from "contexts/theme/theme.context";
 import { setCookie } from "utils/session";
-import nProgress from "nprogress";
+import { useTranslation } from "react-i18next";
+import { ChangeEvent } from "react";
 
 type Props = {
   onClose: () => void;
 };
 
 export default function LanguagePopover({ onClose }: Props) {
+  const { i18n } = useTranslation();
   const { data } = useQuery("languages", () => languageService.getAllActive());
-  const { setDirection } = useContext(ThemeContext);
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const lang = event.target.value;
     const isRTL = !!data?.data.find((item: Langauge) => item.locale == lang)
       ?.backward;
-    nProgress.start();
+    setCookie("locale", lang);
+    setCookie("dir", isRTL ? "rtl" : "ltr");
     onClose();
-    translationService
-      .getAll({ lang })
-      .then(({ data }) => i18n.addResourceBundle(lang, "translation", data))
-      .finally(() => {
-        setCookie("locale", lang);
-        i18n.changeLanguage(lang);
-        setDirection(isRTL ? "rtl" : "ltr");
-        nProgress.done();
-      });
+    window.location.reload();
   };
 
   const controlProps = (item: string) => ({
@@ -47,12 +37,10 @@ export default function LanguagePopover({ onClose }: Props) {
   return (
     <div className={cls.wrapper}>
       {data?.data?.map((item: Langauge) => (
-        <div key={item.locale} className={cls.row}>
+        <label key={item.locale} htmlFor={item.locale} className={cls.row}>
           <RadioInput {...controlProps(item.locale)} />
-          <label className={cls.label} htmlFor={item.locale}>
-            <span className={cls.text}>{item.title}</span>
-          </label>
-        </div>
+          <span className={cls.text}>{item.title}</span>
+        </label>
       ))}
     </div>
   );

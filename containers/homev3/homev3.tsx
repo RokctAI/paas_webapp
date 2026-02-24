@@ -49,6 +49,7 @@ export default function Home() {
         qs.stringify({
           perPage: PER_PAGE,
           currency_id: currency?.id,
+          address: location,
           verify: 1,
         }),
       ),

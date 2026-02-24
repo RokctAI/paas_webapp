@@ -83,7 +83,7 @@ const ColorlibStepIconRoot = styled("div")<{
 function ColorlibStepIcon(props: StepIconProps) {
   const { active, completed, className } = props;
 
-  const icons: { [index: string]: React.ReactElement } = {
+  const icons: { [index: string]: React.ReactElement<any> } = {
     1: <SurveyFillIcon />,
     2: <CheckDoubleFillIcon />,
     3: <TruckFillIcon />,

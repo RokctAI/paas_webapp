@@ -40,6 +40,7 @@ export default function StoryItem({
     if (!time) {
       storyNext(swiper);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [time]);
 
   const goToOrder = () => {

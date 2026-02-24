@@ -20,6 +20,9 @@ const Input = styled(TextField)({
   "& .MuiInputLabel-root.Mui-focused": {
     color: "var(--black)",
   },
+  "& .MuiInputLabel-root.Mui-disabled": {
+    color: "var(--black)",
+  },
   "& .MuiInput-root": {
     fontSize: 16,
     fontWeight: 500,
@@ -29,15 +32,19 @@ const Input = styled(TextField)({
     "&.Mui-error::after": {
       borderBottomColor: "var(--red)",
     },
-  },
-  "& .MuiInput-root::before": {
-    borderBottom: "1px solid var(--grey)",
-  },
-  "& .MuiInput-root:hover:not(.Mui-disabled)::before": {
-    borderBottom: "2px solid var(--black)",
-  },
-  "& .MuiInput-root::after": {
-    borderBottom: "2px solid var(--primary)",
+    "& input:disabled": {
+      "-webkit-text-fill-color": "var(--secondary-text)",
+      cursor: "not-allowed",
+    },
+    "&::before": {
+      borderBottom: "1px solid var(--grey)",
+    },
+    "&:hover:::before": {
+      borderBottom: "2px solid var(--black)",
+    },
+    "&::after": {
+      borderBottom: "2px solid var(--primary)",
+    },
   },
 });
 

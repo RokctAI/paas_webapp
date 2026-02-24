@@ -42,7 +42,7 @@ export default function ShopsPage() {
           address: location,
           open: filter === "popular" ? 1 : undefined,
           currency_id: currency?.id,
-        }),
+        })
       ),
     {
       enabled: filter !== "recomended",
@@ -52,7 +52,7 @@ export default function ShopsPage() {
         }
         return undefined;
       },
-    },
+    }
   );
 
   const { data: recommendedShops, isLoading: isRecomendedLoading } = useQuery(
@@ -64,7 +64,7 @@ export default function ShopsPage() {
       }),
     {
       enabled: filter === "recomended",
-    },
+    }
   );
 
   const shops = useMemo(() => {
@@ -86,7 +86,7 @@ export default function ShopsPage() {
         fetchNextPage();
       }
     },
-    [fetchNextPage, hasNextPage],
+    [fetchNextPage, hasNextPage]
   );
 
   useEffect(() => {

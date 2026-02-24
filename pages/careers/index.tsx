@@ -16,8 +16,7 @@ export default function Careers({}: Props) {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, isLoading } =
     useInfiniteQuery(
       ["careers", locale],
-      ({ pageParam = 1 }) =>
-        careerService.getAll({ page: pageParam, active: 1 }),
+      ({ pageParam = 1 }) => careerService.getAll({ page: pageParam, active: 1 }),
       {
         getNextPageParam: (lastPage: any) => {
           if (lastPage.meta.current_page < lastPage.meta.last_page) {
@@ -25,7 +24,7 @@ export default function Careers({}: Props) {
           }
           return undefined;
         },
-      },
+      }
     );
 
   const handleObserver = useCallback(
@@ -35,7 +34,7 @@ export default function Careers({}: Props) {
         fetchNextPage();
       }
     },
-    [hasNextPage, fetchNextPage],
+    [hasNextPage, fetchNextPage]
   );
 
   useEffect(() => {

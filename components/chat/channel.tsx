@@ -37,7 +37,7 @@ export default function Channel({ groupMessages, messageEndRef }: Props) {
                   time={item.created_at}
                   chat_img={item.chat_img}
                 />
-              ),
+              )
             )}
           </div>
         </div>

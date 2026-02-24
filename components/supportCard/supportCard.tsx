@@ -47,7 +47,7 @@ export default function SupportCard({}: Props) {
         onClose={handleClose}
         PaperProps={{ style: { padding: 0 } }}
       >
-        <Chat />
+        {open && <Chat />}
       </DrawerContainer>
     </div>
   );

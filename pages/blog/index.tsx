@@ -1,7 +1,7 @@
 import Loader from "components/loader/loader";
 import SEO from "components/seo";
 import BlogList from "containers/blogList/blogList";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import React, { useCallback, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { dehydrate, QueryClient, useInfiniteQuery } from "react-query";
@@ -43,6 +43,7 @@ export default function BlogPage({}: Props) {
     if (target.isIntersecting && hasNextPage) {
       fetchNextPage();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -69,7 +70,7 @@ export default function BlogPage({}: Props) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const queryClient = new QueryClient();
   const locale = getLanguage(getCookie("locale", ctx));
 
@@ -81,6 +82,5 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     props: {
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
     },
-    revalidate: 3600,
   };
 };

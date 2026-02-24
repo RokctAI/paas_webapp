@@ -14,16 +14,16 @@ const IOSSwitch = styled(Switch)({
       transform: "translateX(26px)",
       color: "#fff",
       "& + .MuiSwitch-track": {
-        backgroundColor: "#83EA00",
+        backgroundColor: "var(--primary)",
         opacity: 1,
-        border: "0.8px solid #76D003 !important",
+        border: "0.8px solid var(--primary) !important",
       },
       "&.Mui-disabled + .MuiSwitch-track": {
         opacity: 0.5,
       },
     },
     "&.Mui-focusVisible .MuiSwitch-thumb": {
-      color: "#33cf4d",
+      color: "var(--primary)",
       border: "6px solid #fff",
     },
     "&.Mui-disabled .MuiSwitch-thumb": {

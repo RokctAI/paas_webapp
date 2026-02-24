@@ -11,15 +11,15 @@ import ModalContainer from "containers/modal/modal";
 import { ParcelType } from "interfaces/parcel.interface";
 import ParcelShow from "components/parcelShow/parcelShow";
 
-interface Props extends SelectProps {
+type Props = SelectProps & {
   options?: {
     label: string;
     value: string;
     data: ParcelType;
   }[];
   type?: "standard" | "outlined";
-  icon?: React.ReactElement;
-}
+  icon?: React.ReactElement<any>;
+};
 
 export default function RcParcelPicker({
   value,

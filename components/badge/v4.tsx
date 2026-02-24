@@ -12,7 +12,7 @@ type Props = {
 };
 
 export default function Badge({
-  type = "bonus",
+  type ="bonus",
   variant = "default",
   size = "medium",
 }: Props) {

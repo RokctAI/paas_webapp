@@ -8,6 +8,10 @@ import { useFormik } from "formik";
 import authService from "services/auth";
 import { error } from "components/alert/toast";
 import { useAuth } from "contexts/auth/auth.context";
+import MailLineIcon from "remixicon-react/MailLineIcon";
+import PhoneLineIcon from "remixicon-react/PhoneLineIcon";
+import { TabSwitch } from "../tabSwitch/tabSwitch";
+import { PhoneNumberInput } from "../phoneNumberInput/phoneNumberInput";
 
 type RegisterViews = "REGISTER" | "VERIFY" | "COMPLETE";
 type Props = {
@@ -16,8 +20,21 @@ type Props = {
 };
 
 interface formValues {
-  email: string;
+  type: "email" | "phone";
+  email?: string;
+  phone?: string;
 }
+
+const tabs = [
+  {
+    value: "email",
+    icon: <MailLineIcon />,
+  },
+  {
+    value: "phone",
+    icon: <PhoneLineIcon />,
+  },
+];
 
 export default function RegisterForm({ onSuccess, changeView }: Props) {
   const { t } = useTranslation();
@@ -25,16 +42,17 @@ export default function RegisterForm({ onSuccess, changeView }: Props) {
 
   const isUsingCustomPhoneSignIn =
     process.env.NEXT_PUBLIC_CUSTOM_PHONE_SINGUP === "true";
-  const isDemo = process.env.NEXT_PUBLIC_IS_DEMO_APP === "true";
 
   const formik = useFormik({
     initialValues: {
+      type: "email",
       email: "",
+      phone: "",
     },
     onSubmit: (values: formValues, { setSubmitting }) => {
-      if (values.email?.includes("@")) {
+      if (values.type === "email") {
         authService
-          .register(values)
+          .register({ email: values.email })
           .then((res) => {
             onSuccess({ ...res, email: values.email });
             changeView("VERIFY");
@@ -48,11 +66,11 @@ export default function RegisterForm({ onSuccess, changeView }: Props) {
       } else {
         if (isUsingCustomPhoneSignIn) {
           authService
-            .register({ phone: values.email })
+            .register({ phone: values.phone })
             .then((res) => {
               onSuccess({
                 ...res,
-                email: values.email,
+                email: values.phone,
                 verifyId: res.data?.verifyId,
               });
               changeView("VERIFY");
@@ -64,15 +82,15 @@ export default function RegisterForm({ onSuccess, changeView }: Props) {
               setSubmitting(false);
             });
         } else {
-          phoneNumberSignIn(values.email)
+          phoneNumberSignIn(values.phone as string)
             .then((confirmationResult) => {
               onSuccess({
-                email: values.email,
+                email: values.phone,
                 callback: confirmationResult,
               });
               changeView("VERIFY");
             })
-            .catch((err) => {
+            .catch(() => {
               error(t("sms.not.sent"));
             })
             .finally(() => {
@@ -84,17 +102,21 @@ export default function RegisterForm({ onSuccess, changeView }: Props) {
 
     validate: (values: formValues) => {
       const errors = {} as formValues;
-      if (!values.email) {
-        errors.email = t("required");
-      }
-      if (
-        values.email.includes("@") &&
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
-      ) {
-        errors.email = t("must.be.valid");
-      }
-      if (values.email?.includes(" ")) {
-        errors.email = t("should.not.includes.empty.space");
+      if (values.type === "email") {
+        if (!values.email) {
+          errors.email = t("required");
+        } else if (
+          values.email?.includes("@") &&
+          !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)
+        ) {
+          errors.email = t("email.should.be.valid");
+        } else if (values.email?.includes(" ")) {
+          errors.email = t("should.not.includes.empty.space");
+        }
+      } else {
+        if (!values.phone) {
+          errors.phone = t("required");
+        }
       }
       return errors;
     },
@@ -109,15 +131,33 @@ export default function RegisterForm({ onSuccess, changeView }: Props) {
         </p>
       </div>
       <div className={cls.space} />
-      <TextInput
-        name="email"
-        label={isDemo ? t("email") : t("email.or.phone")}
-        placeholder={t("type.here")}
-        value={formik.values.email}
-        onChange={formik.handleChange}
-        error={!!formik.errors.email}
-        helperText={formik.errors.email}
+      <TabSwitch
+        tabs={tabs}
+        selectedTab={formik.values.type}
+        setSelectedTab={(type) => formik.setFieldValue("type", type)}
       />
+      <div className={cls.space} />
+      {formik.values.type === "email" ? (
+        <TextInput
+          name="email"
+          label={t("email")}
+          placeholder={t("type.here")}
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          error={!!formik.errors.email && formik.touched.email}
+        />
+      ) : (
+        <div className={cls.phone}>
+          <label htmlFor="phone" className={cls.label}>
+            {t("phone")}
+          </label>
+          <PhoneNumberInput
+            name="phone"
+            value={formik.values.phone || ""}
+            onChange={(phone) => formik.setFieldValue("phone", phone)}
+          />
+        </div>
+      )}
       <div className={cls.space} />
       <div className={cls.action}>
         <PrimaryButton

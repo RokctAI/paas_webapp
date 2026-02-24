@@ -190,7 +190,7 @@ export default function OrderInfo({ data }: Props) {
         <br />
         <label>{t("payment.type")}</label>
         <h6 className={cls.text} style={{ textTransform: "capitalize" }}>
-          {t(data?.transaction?.payment_system.tag)}
+          {t(data?.transaction?.payment_system?.tag)}
         </h6>
         <br />
         <label>{t("payment.status")}</label>
@@ -299,7 +299,7 @@ export default function OrderInfo({ data }: Props) {
         ""
       )}
       {UNPAID_STATUSES.includes(data?.transaction?.status || "paid") &&
-      data?.transaction?.payment_system.tag !== "cash" ? (
+      data?.transaction?.payment_system?.tag !== "cash" ? (
         <PayToUnpaidOrders data={data} />
       ) : (
         ""

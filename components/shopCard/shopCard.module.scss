@@ -53,23 +53,33 @@
       top: -40px;
       left: 20px;
     }
-    .title {
+    .titleContainer {
       display: flex;
       align-items: center;
       column-gap: 5px;
-      margin: 0;
       margin-bottom: 5px;
+    }
+    .title {
+      margin: 0;
       font-size: 16px;
       font-weight: 700;
       color: var(--secondary-black);
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
     }
     .text {
       margin: 0;
       font-size: 12px;
       font-weight: 500;
-      text-overflow: ellipsis;
+      //text-overflow: ellipsis;
+      //overflow: hidden;
+      //white-space: nowrap;
       overflow: hidden;
-      white-space: nowrap;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
     }
   }
   .footer {

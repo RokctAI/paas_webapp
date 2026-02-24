@@ -50,7 +50,7 @@ export default function ProductUI({
     <div className={cls.wrapper}>
       {loading ? (
         <>
-          <ProductShare data={data} />
+          <ProductShare />
           <h1 className={cls.title}>{data.translation?.title}</h1>
           <div className={cls.flex}>
             <aside className={cls.aside}>

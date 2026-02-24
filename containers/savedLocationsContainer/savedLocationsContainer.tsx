@@ -56,7 +56,7 @@ export default function SavedLocationsContainer({
             onClose={() => {
               setSelectedAddress(null);
             }}
-            latlng={selectedAddress?.location.join(",")}
+            latlng={`${selectedAddress?.location?.latitude || 0},${selectedAddress?.location?.longitude || 0}`}
             address={selectedAddress?.address?.address}
             fullScreen={!isDesktop}
             editedAddress={selectedAddress}

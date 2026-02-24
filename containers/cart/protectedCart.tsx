@@ -37,7 +37,7 @@ export default function ProtectedCart({ shop }: Props) {
       refetchInterval: cart.group ? 5000 : false,
       refetchOnWindowFocus: Boolean(cart.group),
       staleTime: 0,
-    },
+    }
   );
 
   return (

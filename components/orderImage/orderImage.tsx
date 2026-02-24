@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import ImageViewer from "react-simple-image-viewer";
 import ModalContainer from "containers/modal/modal";
 import cls from "./orderImage.module.scss";
+import Image from "next/image";
 
 type Props = {
   data?: Order;
@@ -19,8 +20,9 @@ export default function OrderImage({ data }: Props) {
           <h3 className={cls.title}>{t("order.image")}</h3>
         </div>
         <div className={cls.body}>
-          <img
-            src={data?.image_after_delivered}
+          <Image
+            fill
+            src={data?.image_after_delivered || ""}
             alt={t("order.image")}
             onClick={() => setIsViewerOpen(true)}
           />

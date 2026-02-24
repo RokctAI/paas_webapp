@@ -85,10 +85,10 @@ export default function ReservationTimes({
     const isToday = exactDate.isToday();
     const weekDay = WEEK[today];
     const workingSchedule = data?.booking_shop_working_days?.find(
-      (item) => item.day === weekDay && !item.disabled,
+      (item) => item.day === weekDay && !item.disabled
     );
     const isHoliday = data?.booking_shop_closed_date?.some((item) =>
-      dayjs(item.day).isSame(exactDateString),
+      dayjs(item.day).isSame(exactDateString)
     );
     if (workingSchedule && !isHoliday) {
       const from = workingSchedule.from.replace("-", ":");
@@ -101,12 +101,12 @@ export default function ReservationTimes({
           getBookingStartDate(
             el.start_date,
             minReservationHour,
-            reservationTimeInterval,
+            reservationTimeInterval
           ),
           getBookingEndDate(el.start_date, el.end_date, minReservationHour),
           "minute",
-          "[)",
-        ),
+          "[)"
+        )
       );
       const isBookingValid = dayjs(`${exactDateString} ${item}:00`)
         .subtract(reservationValidBeforeHour, "hour")
@@ -127,7 +127,7 @@ export default function ReservationTimes({
         },
       },
       undefined,
-      { shallow: true },
+      { shallow: true }
     );
   }
 

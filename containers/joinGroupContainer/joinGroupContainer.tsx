@@ -11,8 +11,9 @@ type Props = {};
 export default function JoinGroupContainer({}: Props) {
   const isDesktop = useMediaQuery("(min-width:1140px)");
   const { isMember } = useShop();
-  const [joinGroupModal, handleOpenModal, handleCloseModal] =
-    useModal(!isMember);
+  const [joinGroupModal, handleOpenModal, handleCloseModal] = useModal(
+    !isMember
+  );
 
   return (
     <div>

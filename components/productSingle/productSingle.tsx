@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Product, ProductExtra, Stock } from "interfaces";
 import { getExtras, sortExtras } from "utils/getExtras";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
@@ -9,9 +9,6 @@ import { useQuery } from "react-query";
 import productService from "services/product";
 import ProductUI from "./productUI";
 import AddonsForm from "components/extrasForm/addonsForm";
-import { info } from "components/alert/toast";
-import { useTranslation } from "react-i18next";
-import { useShop } from "contexts/shop/shop.context";
 import { selectCurrency } from "redux/slices/currency";
 
 type Props = {
@@ -28,7 +25,6 @@ type SelectedAddon = {
 };
 
 export default function ProductSingle({ handleClose, uuid }: Props) {
-  const { t } = useTranslation();
   const [counter, setCounter] = useState<number>(1);
   const [extras, setExtras] = useState<any[]>([]);
   const [stock, setStock] = useState<any[]>([]);
@@ -46,7 +42,6 @@ export default function ProductSingle({ handleClose, uuid }: Props) {
   const cart = useAppSelector(selectCart);
   const currency = useAppSelector(selectCurrency);
   const [openPrompt, handleOpenPrompt, handleClosePrompt] = useModal();
-  const { isOpen, isShopClosed } = useShop();
   const [selectedAddons, setSelectedAddons] = useState<SelectedAddon[]>([]);
 
   const { data } = useQuery(

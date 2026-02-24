@@ -11,22 +11,25 @@ import { useRouter } from "next/router";
 import { setCookie } from "utils/session";
 import nProgress from "nprogress";
 import { error } from "components/alert/toast";
+import { useSettings } from "contexts/settings/settings.context";
 
 type Props = {};
 
 export default function SocialLogin({}: Props) {
   const { t } = useTranslation();
+  const { settings } = useSettings();
   const { googleSignIn, facebookSignIn, appleSignIn, setUserData } = useAuth();
   const { push, query } = useRouter();
   const referralCode: any = query.referral_code;
 
   const handleGoogleSignIn = async () => {
     try {
-      await googleSignIn().then((res) => {
+      await googleSignIn().then(async (res) => {
+        const idToken = await res.user.getIdToken();
         const body = {
           name: res.user.displayName,
           email: res.user.email,
-          id: res.user.uid,
+          id: idToken,
           referral: referralCode || undefined,
         };
         nProgress.start();
@@ -49,11 +52,12 @@ export default function SocialLogin({}: Props) {
 
   const handleFacebookSignIn = async () => {
     try {
-      await facebookSignIn().then((res) => {
+      await facebookSignIn().then(async (res) => {
+        const idToken = await res.user.getIdToken();
         const body = {
           name: res.user.displayName,
           email: res.user.email,
-          id: res.user.uid,
+          id: idToken,
           avatar: res.user.photoURL,
           referral: referralCode || undefined,
         };
@@ -78,12 +82,12 @@ export default function SocialLogin({}: Props) {
   const handleAppleSignIn = async () => {
     console.log("apple sign in");
     try {
-      await appleSignIn().then((res) => {
-        console.log("res => ", res);
+      await appleSignIn().then(async (res) => {
+        const idToken = await res.user.getIdToken();
         const body = {
           name: res.user.displayName,
           email: res.user.email,
-          id: res.user.uid,
+          id: idToken,
           referral: referralCode || undefined,
         };
         nProgress.start();
@@ -112,22 +116,36 @@ export default function SocialLogin({}: Props) {
         <div className={cls.line} />
       </div>
       <div className={cls.flex}>
-        <button type="button" className={cls.item} onClick={handleAppleSignIn}>
-          <AppleFillIcon />
-          <span className={cls.text}>Apple</span>
-        </button>
-        <button
-          type="button"
-          className={cls.item}
-          onClick={handleFacebookSignIn}
-        >
-          <FacebookCircleFillIcon />
-          <span className={cls.text}>Facebook</span>
-        </button>
-        <button type="button" className={cls.item} onClick={handleGoogleSignIn}>
-          <GoogleFillIcon />
-          <span className={cls.text}>Google</span>
-        </button>
+        {settings?.social_auth_apple === "1" && (
+          <button
+            type="button"
+            className={cls.item}
+            onClick={handleAppleSignIn}
+          >
+            <AppleFillIcon />
+            <span className={cls.text}>Apple</span>
+          </button>
+        )}
+        {settings?.social_auth_facebook === "1" && (
+          <button
+            type="button"
+            className={cls.item}
+            onClick={handleFacebookSignIn}
+          >
+            <FacebookCircleFillIcon />
+            <span className={cls.text}>Facebook</span>
+          </button>
+        )}
+        {settings?.social_auth_google === "1" && (
+          <button
+            type="button"
+            className={cls.item}
+            onClick={handleGoogleSignIn}
+          >
+            <GoogleFillIcon />
+            <span className={cls.text}>Google</span>
+          </button>
+        )}
       </div>
     </div>
   );

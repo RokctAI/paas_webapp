@@ -96,6 +96,7 @@ export interface IShop {
   open: boolean;
   verify: Number;
   min_amount?: number;
+  status?: string;
 }
 
 export interface IBookingShop {
@@ -628,4 +629,26 @@ export interface NotificationData {
   id: number;
   status?: string;
   type?: string;
+}
+
+export interface DeliverymanLocation {
+  type?: string;
+  data?: {
+    id?: number;
+    location: {
+      latitude: number;
+      longitude: number;
+    };
+    user_id?: number;
+    order?: Order;
+  };
+}
+
+export interface DeliverymanLocationCustomData {
+  location: {
+    latitude: number;
+    longitude: number;
+  };
+  firstname?: string;
+  lastname?: string;
 }

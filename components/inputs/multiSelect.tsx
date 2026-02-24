@@ -72,9 +72,9 @@ interface ListType {
   parent?: ListType;
 }
 
-interface Props extends SelectProps {
+type Props = SelectProps & {
   options: ListType[];
-}
+};
 
 const renderOptions = (options: ListType[]) =>
   options.map((option) => (

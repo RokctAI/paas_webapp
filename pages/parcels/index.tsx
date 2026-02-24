@@ -29,7 +29,7 @@ export default function ParcelOrders({}: Props) {
       sort: "desc",
       locale,
     }),
-    [currency, locale],
+    [currency, locale]
   );
   const loader = useRef(null);
 
@@ -41,12 +41,12 @@ export default function ParcelOrders({}: Props) {
           ...payload,
           statuses: activeOrderStatuses,
           perPage: 100,
-        }),
+        })
       ),
     {
       staleTime: 0,
       refetchOnWindowFocus: true,
-    },
+    }
   );
 
   const {
@@ -64,7 +64,7 @@ export default function ParcelOrders({}: Props) {
           ...payload,
           page: pageParam,
           statuses: orderHistoryStatuses,
-        }),
+        })
       ),
     {
       getNextPageParam: (lastPage: any) => {
@@ -75,7 +75,7 @@ export default function ParcelOrders({}: Props) {
       },
       staleTime: 0,
       refetchOnWindowFocus: true,
-    },
+    }
   );
 
   const orders = data?.pages?.flatMap((item) => item.data);
@@ -87,7 +87,7 @@ export default function ParcelOrders({}: Props) {
         fetchNextPage();
       }
     },
-    [hasNextPage, fetchNextPage],
+    [hasNextPage, fetchNextPage]
   );
 
   useEffect(() => {

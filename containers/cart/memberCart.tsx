@@ -54,7 +54,7 @@ export default function MemberCart({ shop }: Props) {
       refetchInterval: 5000,
       refetchOnWindowFocus: true,
       staleTime: 0,
-    },
+    }
   );
 
   return (

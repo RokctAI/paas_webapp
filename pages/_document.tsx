@@ -11,19 +11,41 @@ import {
   createEmotionCache,
   createRtlEmotionCache,
 } from "utils/createEmotionCache";
-import { EmotionJSX } from "@emotion/react/types/jsx-namespace";
+import { JSX, useMemo } from "react";
 import { getCookie } from "utils/session";
+import informationService from "services/information";
+import createSettings from "utils/createSettings";
+import { PRIMARY_BUTTON_FONT_COLOR, PRIMARY_COLOR } from "constants/config";
+import { hexToRgba } from "utils/hexToRgba";
 
 interface MyDocumentProps extends DocumentProps {
-  emotionStyleTags: EmotionJSX.Element[];
+  emotionStyleTags: JSX.Element[];
+  settings: any;
 }
 
-export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
+export default function MyDocument({
+  emotionStyleTags,
+  settings,
+}: MyDocumentProps) {
+  const settingsData = createSettings(settings?.data || []);
+  const css = `
+      :root {
+         --primary: ${settingsData?.primary_color || PRIMARY_COLOR};
+         --primary-selected: ${hexToRgba(settingsData?.primary_color || PRIMARY_COLOR, 0.1)};
+         --primary-button-font-color: ${settingsData?.primary_button_font_color || PRIMARY_BUTTON_FONT_COLOR};
+      }
+      [data-theme="dark"] {
+        --primary: ${settingsData?.primary_color || PRIMARY_COLOR};
+        --primary-selected: ${hexToRgba(settingsData?.primary_color || PRIMARY_COLOR, 0.1)};
+        --primary-button-font-color: ${settingsData?.primary_button_font_color || PRIMARY_BUTTON_FONT_COLOR};
+      }
+  `;
   return (
     <Html>
       <Head>
         <meta name="emotion-insertion-point" content="" />
         {emotionStyleTags}
+        <style>{css}</style>
       </Head>
       <body>
         <Main />
@@ -34,6 +56,7 @@ export default function MyDocument({ emotionStyleTags }: MyDocumentProps) {
 }
 
 MyDocument.getInitialProps = async (ctx: DocumentContext) => {
+  const settings = await informationService.getSettings();
   const originalRenderPage = ctx.renderPage;
   const appDirection = getCookie("dir", ctx);
   const cache =
@@ -54,7 +77,6 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
     <style
       data-emotion={`${style.key} ${style.ids.join(" ")}`}
       key={style.key}
-      // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{ __html: style.css }}
     />
   ));
@@ -62,5 +84,6 @@ MyDocument.getInitialProps = async (ctx: DocumentContext) => {
   return {
     ...initialProps,
     emotionStyleTags,
+    settings,
   };
 };

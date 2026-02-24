@@ -34,6 +34,8 @@ function errorHandler(error) {
       removeCookie("user");
       removeCookie("access_token");
       window.location.replace("/login");
+    } else if (error?.response?.status === 404) {
+      console.log("404 Not Found:", error?.config?.url);
     }
   }
   console.log("error => ", error);

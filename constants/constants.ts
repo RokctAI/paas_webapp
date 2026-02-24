@@ -15,6 +15,7 @@ export const EXTERNAL_PAYMENTS = [
   "paytabs",
   "mercado-pago",
   "flutterWave",
+  "flutter-wave",
   "paypal",
   "pay-fast",
 ];

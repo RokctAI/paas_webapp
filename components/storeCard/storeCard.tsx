@@ -35,10 +35,10 @@ export default function StoreCard({ data }: Props) {
         </div>
       </div>
       <div className={cls.body}>
-        <h3 className={cls.title}>
-          {data.translation?.title}
+        <div className={cls.titleHeader}>
+          <h3 className={cls.title}>{data.translation?.title}</h3>
           {data?.verify === 1 && <VerifiedComponent />}
-        </h3>
+        </div>
         <p className={cls.text}>
           {data.bonus ? (
             <BonusCaption data={data.bonus} />

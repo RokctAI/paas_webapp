@@ -1,6 +1,27 @@
 import { IBlog, INotification, IShop, Order, OrderStatus } from "interfaces";
 import { IAddress } from "./address.interface";
 
+export interface Location {
+  latitude: string;
+  longitude: string;
+}
+
+export interface DeliverymanSettings {
+  brand: string;
+  color: string;
+  height: number;
+  id: number;
+  kg: number;
+  length: number;
+  location: Location;
+  model: string;
+  number: number;
+  online: boolean;
+  type_of_technique: string;
+  user_id: number;
+  width: number;
+}
+
 export interface IUser {
   id: number;
   firstname: string;
@@ -26,6 +47,7 @@ export interface IUser {
   my_referral?: string;
   empty_p?: boolean;
   addresses?: IAddress[];
+  delivery_man_setting?: DeliverymanSettings;
 }
 
 export interface LoginCredentials {

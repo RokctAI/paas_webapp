@@ -16,13 +16,7 @@ export default function SubCategoryList({ subCategories }: Props) {
         <Link
           className={`${cls.link} ${query?.sub_category_id === category.id.toString()}`}
           shallow
-          href={{
-            query: {
-              sub_category_id: category.id,
-              id: query?.id,
-              category_id: query?.category_id,
-            },
-          }}
+          href={{ query: { sub_category_id: category.id, id: query?.id, category_id: query?.category_id } }}
           key={category.id}
         >
           {category.translation?.title}

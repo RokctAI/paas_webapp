@@ -30,6 +30,10 @@ export const DYNAMIC_LINK_IOS =
   process.env.NEXT_PUBLIC_DYNAMIC_LINK_IOS_BUNDLE_ID;
 export const DYNAMIC_LINK_WEB_KEY = process.env.NEXT_PUBLIC_FIREBASE_WEB_KEY;
 
+export const PRIMARY_COLOR = process.env.NEXT_PUBLIC_PRIMARY_COLOR as string;
+export const PRIMARY_BUTTON_FONT_COLOR = process.env
+  .NEXT_PUBLIC_PRIMARY_BUTTON_FONT_COLOR as string;
+
 export const defaultUser = {
   login: "user@githubit.com",
   password: "githubit",

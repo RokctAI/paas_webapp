@@ -36,7 +36,7 @@ export default function Chat() {
   const { pathname, query } = useRouter();
   const dispatch = useAppDispatch();
   const [modal, handleOpenModal, handleCloseModal] = useModal();
-  const messageEndRef = useRef<HTMLDivElement>();
+  const messageEndRef = useRef<HTMLDivElement>(null);
   const [file, setFile] = useState("");
   const [url, setUrl] = useState("");
   const isShop = pathname === "/restaurant/[id]" || pathname === "/shop/[id]";
@@ -83,6 +83,7 @@ export default function Chat() {
             : item.roleId == "admin",
       );
     handleChat(myChat);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [chats]);
 
   function handleFile(event: any) {

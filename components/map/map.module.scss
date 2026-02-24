@@ -47,3 +47,88 @@
   left: 50%;
   transform: translate(-50%, -90%);
 }
+
+.deliverymanMarker {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -90%);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 4px;
+
+  /* Add transition for smooth movement */
+  transition: transform 0.5s ease-in-out;
+  will-change: transform; /* Optimization for animations */
+
+  .title {
+    max-width: 120px;
+    padding: 4px 8px;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow:
+      0 0 #0000,
+      0 0 #0000,
+      0 0 #0000,
+      0 0 #0000,
+      0 4px 6px -1px rgb(0 0 0 / 0.1);
+    text-align: center;
+  }
+
+  .icon {
+    position: relative;
+    background: var(--primary);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+
+    svg {
+      fill: var(--primary-button-font-color);
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .circle {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--primary);
+  }
+}
+
+.radarPulse {
+  position: absolute;
+  top: calc(50% - 28px);
+  left: calc(50% - 28px);
+  width: 56px;
+  height: 56px;
+  border-radius: 9999px;
+  background-color: var(--primary);
+  opacity: 0.3;
+  z-index: -1;
+
+  // Optional pulse animation
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.1;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.1;
+  }
+}

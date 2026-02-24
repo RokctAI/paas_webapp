@@ -22,7 +22,7 @@ type Props = {
 
 export default function WelcomeHero({ data, stats }: Props) {
   const { t, locale } = useLocale();
-  const inputRef = useRef<any>();
+  const inputRef = useRef<any>(undefined);
   const { push } = useRouter();
   const { updateAddress, updateLocation } = useSettings();
   const [location, setLocation] = useState({ lat: 0, lng: 0 });

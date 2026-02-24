@@ -67,7 +67,7 @@ export default function ParcelInfo({ data }: Props) {
         <br />
         <label>{t("payment.type")}</label>
         <h6 className={cls.text} style={{ textTransform: "capitalize" }}>
-          {t(data?.transaction?.payment_system.tag)}
+          {t(data?.transaction?.payment_system?.tag)}
         </h6>
         <br />
         <label>{t("payment.status")}</label>

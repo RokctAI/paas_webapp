@@ -49,7 +49,7 @@ export default function MobileSearchContainer(props: DialogProps) {
       },
       retry: false,
       enabled: !!debouncedSearchTerm,
-    },
+    }
   );
 
   const {
@@ -78,7 +78,7 @@ export default function MobileSearchContainer(props: DialogProps) {
       onSuccess: () => {
         dispatch(addToSearch(debouncedSearchTerm));
       },
-    },
+    }
   );
 
   return (

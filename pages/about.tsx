@@ -2,7 +2,7 @@ import React from "react";
 import SEO from "components/seo";
 import AboutUs from "containers/aboutUs/aboutUs";
 import AppSection from "containers/appSection/appSection";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { QueryClient, dehydrate, useQuery } from "react-query";
 import getLanguage from "utils/getLanguage";
 import { getCookie } from "utils/session";
@@ -42,7 +42,7 @@ export default function About({}: Props) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const queryClient = new QueryClient();
   const locale = getLanguage(getCookie("locale", ctx));
 
@@ -54,6 +54,5 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     props: {
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
     },
-    revalidate: 3600,
   };
 };

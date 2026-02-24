@@ -35,7 +35,7 @@ export default function OrderRefunds({}: Props) {
         }
         return undefined;
       },
-    },
+    }
   );
 
   const handleObserver = useCallback(
@@ -45,7 +45,7 @@ export default function OrderRefunds({}: Props) {
         fetchNextPage();
       }
     },
-    [hasNextPage, fetchNextPage],
+    [hasNextPage, fetchNextPage]
   );
 
   useEffect(() => {

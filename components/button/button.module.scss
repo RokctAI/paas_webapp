@@ -23,7 +23,7 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 21px;
-    color: #232b2f;
+    color: var(--primary-button-font-color);
     @media (max-width: 576px) {
       font-size: 16px;
       line-height: 19px;

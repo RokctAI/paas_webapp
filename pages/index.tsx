@@ -28,7 +28,7 @@ export default function Home({ uiType = "1" }: HomeProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const settingsData = await informationService.getSettings();
   const obj = createSettings(settingsData?.data);
 

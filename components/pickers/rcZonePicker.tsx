@@ -11,13 +11,13 @@ import { IBookingZone } from "interfaces/booking.interface";
 import ModalContainer from "containers/modal/modal";
 import ZoneShow from "components/zoneShow/zoneShow";
 
-interface Props extends SelectProps {
+type Props = SelectProps & {
   options?: {
     label: string;
     value: string;
     data: IBookingZone;
   }[];
-}
+};
 
 export default function RcZonePicker({
   value,

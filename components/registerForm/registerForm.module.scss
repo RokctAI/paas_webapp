@@ -39,6 +39,20 @@
   .space {
     padding-top: 50px;
   }
+  .phone {
+    display: flex;
+    flex-direction: column;
+
+    .label {
+      font-size: 12px;
+      line-height: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      color: var(--black);
+      font-family: "Inter", sans-serif;
+      margin-bottom: 6px;
+    }
+  }
   .flex {
     display: flex;
     align-items: center;

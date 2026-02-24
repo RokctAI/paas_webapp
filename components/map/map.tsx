@@ -1,5 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
-import React, { MutableRefObject, useEffect, useRef, useState } from "react";
+import { MutableRefObject, useEffect, useRef, useState } from "react";
 import GoogleMapReact, { Coords } from "google-map-react";
 import cls from "./map.module.scss";
 import { MAP_API_KEY } from "constants/constants";
@@ -8,10 +7,12 @@ import { IShop } from "interfaces";
 import ShopLogoBackground from "components/shopLogoBackground/shopLogoBackground";
 import handleGooglePlacesPress from "utils/handleGooglePlacesPress";
 import Price from "components/price/price";
+import { MapIcon } from "../icons";
 
 const Marker = (props: any) => (
   <div className={cls.point}>
-    <img src="/images/marker.png" width={32} alt="Location" />
+    {/*<img src="/images/marker.png" width={32} alt="Location" />*/}
+    <MapIcon />
   </div>
 );
 const ShopMarker = (props: any) => (
@@ -55,7 +56,7 @@ export default function Map({
   drawLine,
   defaultZoom = 15,
 }: Props) {
-  const autoCompleteRef = useRef<any>();
+  const autoCompleteRef = useRef<any>(undefined);
   const [maps, setMaps] = useState<any>();
   const [map, setMap] = useState<any>();
 
@@ -125,13 +126,15 @@ export default function Map({
       }
       map.fitBounds(bounds);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location, shop?.location, drawLine, map, maps]);
 
   return (
     <div className={cls.root}>
       {!readOnly && (
         <div className={cls.marker}>
-          <img src="/images/marker.png" width={32} alt="Location" />
+          {/*<img src="/images/marker.png" width={32} alt="Location" />*/}
+          <MapIcon />
         </div>
       )}
       <GoogleMapReact

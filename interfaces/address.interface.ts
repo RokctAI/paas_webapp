@@ -7,7 +7,10 @@ export interface AddressCreateData {
     entrance?: string;
     comment?: string;
   };
-  location?: number[];
+  location?: {
+    latitude: number;
+    longitude: number;
+  };
   active?: number | boolean;
 }
 
@@ -21,7 +24,10 @@ export interface IAddress {
   };
   created_at: string;
   id: number;
-  location: number[];
+  location: {
+    latitude: number;
+    longitude: number;
+  };
   title: string;
   user_id: number;
   active: number | boolean;

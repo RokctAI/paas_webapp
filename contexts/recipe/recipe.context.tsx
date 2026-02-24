@@ -9,7 +9,7 @@ type RecipeContextType = {
 };
 
 export const RecipeContext = createContext<RecipeContextType>(
-  {} as RecipeContextType,
+  {} as RecipeContextType
 );
 
 export const useRecipe = () => useContext(RecipeContext);

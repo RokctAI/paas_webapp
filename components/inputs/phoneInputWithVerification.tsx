@@ -40,6 +40,10 @@ const Input = styled(TextField)({
     "&.Mui-error::after": {
       borderBottomColor: "var(--red)",
     },
+    "& input:disabled": {
+      "-webkit-text-fill-color": "var(--secondary-text)",
+      cursor: "not-allowed",
+    },
   },
   "& .MuiInput-root::before": {
     borderBottom: "1px solid var(--grey)",

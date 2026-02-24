@@ -20,7 +20,7 @@ export default function ZoneShow({ zoneId }: Props) {
     {
       enabled: !!zoneId,
       select: (data) => data.data,
-    },
+    }
   );
 
   return (

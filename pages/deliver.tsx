@@ -1,7 +1,7 @@
 import React from "react";
 import SEO from "components/seo";
 import BeDelivery from "containers/beDelivery/beDelivery";
-import { GetStaticProps } from "next";
+import { GetServerSideProps } from "next";
 import { QueryClient, dehydrate, useQuery } from "react-query";
 import { getCookie } from "utils/session";
 import getLanguage from "utils/getLanguage";
@@ -29,7 +29,7 @@ export default function Deliver({}: Props) {
   );
 }
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const queryClient = new QueryClient();
   const locale = getLanguage(getCookie("locale", ctx));
 
@@ -41,6 +41,5 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     props: {
       dehydratedState: JSON.parse(JSON.stringify(dehydrate(queryClient))),
     },
-    revalidate: 3600,
   };
 };

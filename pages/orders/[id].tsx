@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import SEO from "components/seo";
 import OrderHeader from "containers/orderHeader/orderHeader";
 import OrderMap from "containers/orderMap/orderMap";
@@ -17,15 +17,13 @@ const OrderReview = dynamic(
   () => import("containers/orderReviewContainer/orderReviewContainer"),
 );
 
-type Props = {};
-
-export default function OrderSingle({}: Props) {
+export default function OrderSingle() {
+  const dispatch = useAppDispatch();
+  const { query } = useRouter();
   const { i18n } = useTranslation();
   const locale = i18n.language;
-  const { query } = useRouter();
   const [openModal, handleOpen, handleClose] = useModal();
   const orderId = Number(query.id);
-  const dispatch = useAppDispatch();
 
   const { data, isLoading, refetch } = useQuery(
     ["order", orderId, locale],

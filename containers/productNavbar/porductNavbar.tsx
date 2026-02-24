@@ -8,7 +8,7 @@ import { useMediaQuery } from "@mui/material";
 
 const PopoverContainer = dynamic(() => import("containers/popover/popover"));
 const ProductFilter = dynamic(
-  () => import("containers/productFilter/productFilter"),
+  () => import("containers/productFilter/productFilter")
 );
 const MobileDrawer = dynamic(() => import("containers/drawer/mobileDrawer"));
 

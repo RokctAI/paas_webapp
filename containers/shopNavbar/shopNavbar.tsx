@@ -8,7 +8,7 @@ import ScrollspyNav from "react-scrollspy-nav";
 import ArrowDownSLineIcon from "remixicon-react/ArrowDownSLineIcon";
 
 const CategoryDropdown = dynamic(
-  () => import("components/categoryDropdown/categoryDropdown"),
+  () => import("components/categoryDropdown/categoryDropdown")
 );
 
 type Props = {

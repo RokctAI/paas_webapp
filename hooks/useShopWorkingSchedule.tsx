@@ -6,26 +6,16 @@ import { useSelector } from "react-redux";
 import { RootState } from "redux/store";
 
 export default function useShopWorkingSchedule(data?: IShop) {
-  const { order } = useSelector((state: RootState) => state.order);
+  const {order}= useSelector((state: RootState) => state.order)
   const { workingSchedule, isShopClosed, isOpen } = useMemo(() => {
-    const isSelectedDeliveryDate =
-      order.shop_id === data?.id && !!order.delivery_date;
-    const today = isSelectedDeliveryDate
-      ? order.delivery_date
-      : dayjs().format("YYYY-MM-DD");
-    const weekDay =
-      WEEK[
-        isSelectedDeliveryDate
-          ? dayjs(order.delivery_date).day()
-          : dayjs().day()
-      ];
+    const isSelectedDeliveryDate = order.shop_id === data?.id && !!order.delivery_date
+    const today = isSelectedDeliveryDate ? order.delivery_date : dayjs().format("YYYY-MM-DD");
+    const weekDay = WEEK[isSelectedDeliveryDate ? dayjs(order.delivery_date).day() : dayjs().day()];
     const foundedSchedule = data?.shop_working_days?.find(
-      (item) => item.day === weekDay,
+      (item) => item.day === weekDay
     );
     const isHoliday = data?.shop_closed_date?.some((item) =>
-      dayjs(item.day).isSame(
-        isSelectedDeliveryDate ? dayjs(order.delivery_date) : dayjs(),
-      ),
+      dayjs(item.day).isSame(isSelectedDeliveryDate ? dayjs(order.delivery_date) : dayjs())
     );
     const isClosed = !data?.open || isHoliday;
     let schedule = {} as ShopWorkingDays;
