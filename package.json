@@ -69,7 +69,7 @@
     "@types/stylis": "^4.0.2",
     "eslint": "^9.39.1",
     "eslint-config-next": "16.0.10",
-    "prettier": "3.2.5",
+    "prettier": "3.8.1",
     "typescript": "^5.9.3",
     "typescript-plugin-css-modules": "^5.0.1"
   },
