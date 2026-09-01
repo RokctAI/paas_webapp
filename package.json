@@ -17,7 +17,7 @@
     "@emotion/styled": "^11.10.5",
     "@mui/material": "^5.10.12",
     "@mui/x-date-pickers": "^6.8.0",
-    "@next/bundle-analyzer": "16.0.10",
+    "@next/bundle-analyzer": "16.3.3",
     "@reduxjs/toolkit": "^1.9.1",
     "axios": "^1.13.2",
     "css-mediaquery": "^0.1.2",
