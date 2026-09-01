@@ -60,7 +60,7 @@
     "@types/css-mediaquery": "^0.1.1",
     "@types/google-map-react": "^2.1.7",
     "@types/js-cookie": "^3.0.2",
-    "@types/node": "18.11.7",
+    "@types/node": "26.4.0",
     "@types/nprogress": "^0.2.0",
     "@types/qs": "^6.9.7",
     "@types/react": "19.2.7",
