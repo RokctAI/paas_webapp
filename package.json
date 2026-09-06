@@ -22,7 +22,7 @@
     "axios": "^1.13.2",
     "css-mediaquery": "^0.1.2",
     "dayjs": "^1.11.7",
-    "firebase": "^12.6.0",
+    "firebase": "^12.18.0",
     "formik": "^2.2.9",
     "framer-motion": "^12.23.26",
     "google-map-react": "^2.2.0",
